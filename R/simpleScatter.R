@@ -1,6 +1,8 @@
 #Add the subtitle option????
 
-#' Create a scatterplot using ggplot as workhorse
+#' Simple Scatter Plots
+#'
+#' A minimal function to produce a ggplot object from two continuous varaibles.
 #'
 #' @param data frame to be used.
 #' @param x X (independent) variable to be plotted.
