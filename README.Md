@@ -4,10 +4,6 @@ author: "Michael J. Mahometa"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## The SDSRegressionR Pakage
 
 This package is inended to help students in the Applied Regression Analsyis class at The University of Texas at Austin. It contains several functions that will help in the use of regression techniques that are covered in the class.
