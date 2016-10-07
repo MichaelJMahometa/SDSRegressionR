@@ -5,19 +5,21 @@ Version: 0.7
 Date: 2016-04-28
 Author: Michael J. Mahometa
 Maintainer: Michael J. Mahometa <michael.mahometa@austin.utexas.edu>
-Description: Helper functions for the Applied Rgression Analysis course (SDS358) taught at The University of Texas at Austin.
+Description: Helper functions for the Applied Rgression Analysis course (SDS358)
+    taught at The University of Texas at Austin.
 URL: http://github.com/MichaelJMahometa/SDSRegressionR
 BugReports: http://github.com/MichaelJMahometa/SDSRegressionR/issues
 License: CC BY-NC-ND 3.0 US
 LazyData: TRUE
 Imports:
-  ggplot2,
-  stringr,
-  plyr
+    ggplot2,
+    stringr,
+    plyr
 Depends:
-  ggplot2,
-  stringr,
-  grid,
-  plyr
+    ggplot2,
+    stringr,
+    grid,
+    plyr
 Suggests:
-  rgl
+    rgl
+RoxygenNote: 5.0.1
