@@ -3,42 +3,42 @@
 # require rgl (3dplot)
 
 #Add the subtitle option????
-simpleScatter <- function(data, x, y, xlab=deparse(substitute(x)), ylab=deparse(substitute(y)), title=NULL, subtitle=NULL, xlim=NULL, ylim=NULL, line=FALSE, interval="none", ...){
-  #require(ggplot2) #? Do I need this if I require ggplot2 in the package?
-  pars <- as.list(match.call()[-1])
-  xvar <- as.character(pars$x)
-  yvar <- as.character(pars$y)
-  g <- ggplot(data, aes_string(x=xvar, y=yvar)) +
-    geom_point(size=4) +
-    labs(title=title, x=xlab, y=ylab) +
-    coord_cartesian(xlim=xlim, ylim=ylim) +
-    theme_bw()
-  if(line & interval=="none"){
-    g +
-      geom_smooth(method="lm", se=FALSE)
-  } else if(interval=="confidence"){
-    g +
-      geom_smooth(method="lm", se=TRUE, ...)
-  } else if(interval=="prediction") {
-    xv <- data[,xvar]
-    yv <- data[,yvar]
-    m <- lm(yv~xv, data=data)
-    p <- predict(m, data, interval="prediction", ...)
-    clear <- setdiff(rownames(p), names(fitted.values(m)))
-    p[clear,] <- NA
-    newdf <- merge(data, p, by=0, all=TRUE, sort=FALSE)
-    gp <- ggplot(newdf, aes_string(x=xvar, y=yvar)) +
-      geom_point(size=4) +
-      labs(title=title, x=xlab, y=ylab) +
-      coord_cartesian(xlim=xlim, ylim=ylim) +
-      theme_bw() +
-      geom_smooth(method="lm", se=FALSE) +
-      geom_ribbon(data=newdf, aes(ymin=newdf[,(length(newdf)-1)], ymax=newdf[,(length(newdf)-0)]) , alpha=0.2)
-    gp
-  } else {
-    g
-  }
-}
+# simpleScatter <- function(data, x, y, xlab=deparse(substitute(x)), ylab=deparse(substitute(y)), title=NULL, subtitle=NULL, xlim=NULL, ylim=NULL, line=FALSE, interval="none", ...){
+#   #require(ggplot2) #? Do I need this if I require ggplot2 in the package?
+#   pars <- as.list(match.call()[-1])
+#   xvar <- as.character(pars$x)
+#   yvar <- as.character(pars$y)
+#   g <- ggplot(data, aes_string(x=xvar, y=yvar)) +
+#     geom_point(size=4) +
+#     labs(title=title, x=xlab, y=ylab) +
+#     coord_cartesian(xlim=xlim, ylim=ylim) +
+#     theme_bw()
+#   if(line & interval=="none"){
+#     g +
+#       geom_smooth(method="lm", se=FALSE)
+#   } else if(interval=="confidence"){
+#     g +
+#       geom_smooth(method="lm", se=TRUE, ...)
+#   } else if(interval=="prediction") {
+#     xv <- data[,xvar]
+#     yv <- data[,yvar]
+#     m <- lm(yv~xv, data=data)
+#     p <- predict(m, data, interval="prediction", ...)
+#     clear <- setdiff(rownames(p), names(fitted.values(m)))
+#     p[clear,] <- NA
+#     newdf <- merge(data, p, by=0, all=TRUE, sort=FALSE)
+#     gp <- ggplot(newdf, aes_string(x=xvar, y=yvar)) +
+#       geom_point(size=4) +
+#       labs(title=title, x=xlab, y=ylab) +
+#       coord_cartesian(xlim=xlim, ylim=ylim) +
+#       theme_bw() +
+#       geom_smooth(method="lm", se=FALSE) +
+#       geom_ribbon(data=newdf, aes(ymin=newdf[,(length(newdf)-1)], ymax=newdf[,(length(newdf)-0)]) , alpha=0.2)
+#     gp
+#   } else {
+#     g
+#   }
+# }
 
 #Add subtitle to ggplot object
 addSubtitle <- function(title, subtitle){
