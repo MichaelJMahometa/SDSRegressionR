@@ -13,12 +13,8 @@ License: CC BY-NC-ND 3.0 US
 LazyData: TRUE
 Imports:
     ggplot2,
-    stringr,
-    plyr
-Depends:
-    ggplot2,
-    stringr,
     grid,
+    stringr,
     plyr
 Suggests:
     rgl
