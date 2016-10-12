@@ -1,5 +1,3 @@
-#Add the subtitle option????
-
 #' Simple Scatter Plots
 #'
 #' A minimal function to produce a ggplot object from two continuous varaibles.
@@ -20,8 +18,6 @@
 #' @examples
 #' m <- mtcars
 #' simpleScatter(m, disp, hp, title="Horsepower from Displacement")
-
-
 simpleScatter <- function(data, x, y, xlab=deparse(substitute(x)), ylab=deparse(substitute(y)), title=NULL, subtitle=NULL, xlim=NULL, ylim=NULL, line=FALSE, interval="none", ...){
   #require(ggplot2) #? Do I need this if I require ggplot2 in the package?
   pars <- as.list(match.call()[-1])
@@ -58,3 +54,5 @@ simpleScatter <- function(data, x, y, xlab=deparse(substitute(x)), ylab=deparse(
     g
   }
 }
+
+#Add subplot options?
