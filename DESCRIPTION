@@ -9,7 +9,7 @@ Description: Helper functions for the Applied Rgression Analysis course (SDS358)
     taught at The University of Texas at Austin.
 URL: http://github.com/MichaelJMahometa/SDSRegressionR
 BugReports: http://github.com/MichaelJMahometa/SDSRegressionR/issues
-License: CC BY-NC-ND 3.0 US
+License: GPL-2
 LazyData: TRUE
 Imports:
     ggplot2,
