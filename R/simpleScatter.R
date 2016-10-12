@@ -24,7 +24,7 @@ simpleScatter <- function(data, x, y, xlab=deparse(substitute(x)), ylab=deparse(
   pars <- as.list(match.call()[-1])
   xvar <- as.character(pars$x)
   yvar <- as.character(pars$y)
-  g <- ggplot(data, aes_string(x=xvar, y=yvar)) +
+  g <- ggplot2::ggplot(data, aes_string(x=xvar, y=yvar)) +
     geom_point(size=4) +
     labs(title=title, x=xlab, y=ylab) +
     coord_cartesian(xlim=xlim, ylim=ylim) +
@@ -43,7 +43,7 @@ simpleScatter <- function(data, x, y, xlab=deparse(substitute(x)), ylab=deparse(
     clear <- setdiff(rownames(p), names(fitted.values(m)))
     p[clear,] <- NA
     newdf <- merge(data, p, by=0, all=TRUE, sort=FALSE)
-    gp <- ggplot(newdf, aes_string(x=xvar, y=yvar)) +
+    gp <- ggplot2::ggplot(newdf, aes_string(x=xvar, y=yvar)) +
       geom_point(size=4) +
       labs(title=title, x=xlab, y=ylab) +
       coord_cartesian(xlim=xlim, ylim=ylim) +
