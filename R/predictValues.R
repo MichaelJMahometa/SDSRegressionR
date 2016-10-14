@@ -8,7 +8,7 @@
 #'  mod <- lm(hp ~ disp + wt, data=mtcars)
 #'  mtcars$pred <- predictValues(mod)
 #'
-#'  @export
+#' @export
 predictValues <- function(obj){
   orig_data_rows <- row.names(get(paste(obj$call$data)))
   vect <- rep(NA, length(orig_data_rows))

@@ -16,6 +16,5 @@ Basic function to find fitted values for items in an original data frame.
  mod <- lm(hp ~ disp + wt, data=mtcars)
  mtcars$pred <- predictValues(mod)
 
- @export
 }
 
