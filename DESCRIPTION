@@ -16,6 +16,11 @@ Imports:
     grid,
     stringr,
     plyr
+Depends:    
+    ggplot2,
+    grid,
+    stringr,
+    plyr
 Suggests:
     rgl
 RoxygenNote: 5.0.1
