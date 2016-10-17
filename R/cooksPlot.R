@@ -4,6 +4,7 @@
 #'
 #' @inheritParams leveragePlot
 #' @inheritParams studResidPlot
+#' @param save.cutoff Logical: Should the Cook's Distance cutoff be saved to the Global Environment?
 #'
 #' @seealso
 #' \code{\link{studResidPlot}}
@@ -17,7 +18,7 @@
 #' cooksPlot(mod)
 #'
 #'@export
-cooksPlot <- function(obj, ylim=NULL, id=FALSE, print.obs=FALSE, print.plot=TRUE){
+cooksPlot <- function(obj, ylim=NULL, id=FALSE, print.obs=FALSE, print.plot=TRUE, save.cutoff=FALSE){
   thisdf <- get(paste(eval(obj)$call$data))
   cutoff <- 4/(obj$df.residual)
   if(print.plot == TRUE){
@@ -39,5 +40,7 @@ cooksPlot <- function(obj, ylim=NULL, id=FALSE, print.obs=FALSE, print.plot=TRUE
     names(rep_df) <- c(n, "Predicted_Y", "Cooks_D")
     return(rep_df)
   }
+  if(save.cutoff){
   assign("cooksCutOff", cutoff, envir = .GlobalEnv)
+  }
 }

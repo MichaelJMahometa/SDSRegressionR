@@ -5,7 +5,7 @@
 \title{Create a Cook's Distance Plot}
 \usage{
 cooksPlot(obj, ylim = NULL, id = FALSE, print.obs = FALSE,
-  print.plot = TRUE)
+  print.plot = TRUE, save.cutoff = FALSE)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
@@ -17,6 +17,8 @@ cooksPlot(obj, ylim = NULL, id = FALSE, print.obs = FALSE,
 \item{print.obs}{Logical: Should observations outside the specified sigma level be printed to the console?}
 
 \item{print.plot}{Logical: Should plot be created?}
+
+\item{save.cutoff}{Logical: Should the Cook's Distance cutoff be saved to the Global Environment?}
 }
 \description{
 Simple function to produce a plot of the Cook's Distance for each observation after a model run in lm().
