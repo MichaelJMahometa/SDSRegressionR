@@ -2,7 +2,7 @@
 % Please edit documentation in R/threeOuts.R
 \name{threeOuts}
 \alias{threeOuts}
-\title{Produce a data frame that combines all three common outlier types}
+\title{Combine All Three Common Outlier Types}
 \usage{
 threeOuts(obj, print.plot = FALSE)
 }
