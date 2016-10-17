@@ -1,4 +1,4 @@
-#' residFitted
+#' Create a Residual vs. Fitted Plot
 #'
 #' Create a residual versus fitted values plot using base plot.
 #'

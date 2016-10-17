@@ -1,4 +1,4 @@
-#' Produce a data frame that combines all three common outlier types
+#' Combine All Three Common Outlier Types
 #'
 #' Simple function to produce a plots and a final data frame from studentized deleted residuals, hat values (leverage), and Cook's distance, after a model run in lm(). Resulting dataframe will be sorted by the inThree variable (observation is considered an outlier on all three plots) and then the Cooks_D variable.
 #'

@@ -1,4 +1,4 @@
-#' Simple Scatter Plots
+#' Create a Simple ggplot Scatter Plot
 #'
 #' A minimal function to produce a ggplot object from two continuous varaibles.
 #'

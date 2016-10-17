@@ -1,4 +1,4 @@
-#' leveragePlot
+#' Create a Leverage (hat values) Plot
 #'
 #' Simple function to produce a plot of the hat values (leverage) after a model run in lm().
 #'

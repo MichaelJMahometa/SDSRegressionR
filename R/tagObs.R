@@ -1,4 +1,4 @@
-#' tagObs
+#' Mark (tag) Observations in a Data Frame
 #'
 #' A minimal function to mark observations use in a prior run lm() model. Observations will be marked with a new variable in the original data used in the lm() function.
 #'

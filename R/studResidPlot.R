@@ -1,4 +1,4 @@
-#' studResidPlot
+#' Create a Studentized Deleted Residual Plot
 #'
 #' Produce a studentized deleted residual plot.
 #'

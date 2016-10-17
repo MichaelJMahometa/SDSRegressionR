@@ -1,4 +1,4 @@
-#' addSubtitle
+#' Add Subtitle to ggplot Object
 #'
 #' A simple function to add a title and subtitle to an existing ggplot object.
 #'

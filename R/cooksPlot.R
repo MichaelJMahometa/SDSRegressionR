@@ -1,4 +1,4 @@
-#' cooksPlot
+#' Create a Cook's Distance Plot
 #'
 #' Simple function to produce a plot of the Cook's Distance for each observation after a model run in lm().
 #'
