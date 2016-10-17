@@ -25,48 +25,48 @@ stripChunk <- function(in_file, out_file, chunk_line=FALSE){
 }
 
 #histogram with right=FALSE (COPY to SDSFoundations)
-histogram <- function(x, breaks=NULL, table=FALSE, right=FALSE, xlab=deparse(substitute(x)), title=NULL,...){
-  if(is.null(title)){
-    lab <- deparse(substitute(x))
-    lab2 <- paste("Histogram of ", lab, sep="")
-  } else {
-    lab2 <- title
-  }
-  if(is.null(breaks)){
-    h <- hist(x, right=right, xaxt="n", xlab=xlab, main=lab2,...)
-    axis(1, at=h$breaks, labels=h$breaks)
-    if(table == TRUE){
-      span.cut <- cut(x, h$breaks, right=right)
-      span.freq <- table(span.cut)
-      t <- cbind(span.freq)
-      return(t)
-    }
-    return(invisible(h$breaks))
-  } else {
-    h2 <- hist(x, breaks=breaks, right=right, xaxt="n", xlab=xlab, main=lab2, ...)
-    axis(1, at=h2$breaks, labels=h2$breaks)
-    if(table == TRUE){
-      span.cut <- cut(x, h2$breaks, right=right)
-      span.freq <- table(span.cut)
-      t <- cbind(span.freq)
-      return(t)
-    }
-    return(invisible(h2$breaks))
-  }
-}
+# histogram <- function(x, breaks=NULL, table=FALSE, right=FALSE, xlab=deparse(substitute(x)), title=NULL,...){
+#   if(is.null(title)){
+#     lab <- deparse(substitute(x))
+#     lab2 <- paste("Histogram of ", lab, sep="")
+#   } else {
+#     lab2 <- title
+#   }
+#   if(is.null(breaks)){
+#     h <- hist(x, right=right, xaxt="n", xlab=xlab, main=lab2,...)
+#     axis(1, at=h$breaks, labels=h$breaks)
+#     if(table == TRUE){
+#       span.cut <- cut(x, h$breaks, right=right)
+#       span.freq <- table(span.cut)
+#       t <- cbind(span.freq)
+#       return(t)
+#     }
+#     return(invisible(h$breaks))
+#   } else {
+#     h2 <- hist(x, breaks=breaks, right=right, xaxt="n", xlab=xlab, main=lab2, ...)
+#     axis(1, at=h2$breaks, labels=h2$breaks)
+#     if(table == TRUE){
+#       span.cut <- cut(x, h2$breaks, right=right)
+#       span.freq <- table(span.cut)
+#       t <- cbind(span.freq)
+#       return(t)
+#     }
+#     return(invisible(h2$breaks))
+#   }
+# }
 
 #Make a simple plane for 2 independent variables
-simplePlane <- function(model){
-  require(rgl) #? Do I need this if I require rgl in the package?
-  coefs <- coef(model)
-  plot3d(unlist(model$model[2]),unlist(model$model[3]),unlist(model$model[1]), type="p", col="red", xlab=names(coefs[2]), ylab=names(coefs[3]), zlab=names(model$model[1]), sixe=5, lwd=15)
-  a <- coefs[2]
-  b <- coefs[3]
-  c <- -1
-  d <- coefs["(Intercept)"]
-  planes3d(a, b, c, d, alpha=0.2)
-  print("Remember: detach('package:rgl', unload=TRUE)")
-}
+# simplePlane <- function(model){
+#   require(rgl) #? Do I need this if I require rgl in the package?
+#   coefs <- coef(model)
+#   plot3d(unlist(model$model[2]),unlist(model$model[3]),unlist(model$model[1]), type="p", col="red", xlab=names(coefs[2]), ylab=names(coefs[3]), zlab=names(model$model[1]), sixe=5, lwd=15)
+#   a <- coefs[2]
+#   b <- coefs[3]
+#   c <- -1
+#   d <- coefs["(Intercept)"]
+#   planes3d(a, b, c, d, alpha=0.2)
+#   print("Remember: detach('package:rgl', unload=TRUE)")
+# }
 
 # Multiple plot function
 #
