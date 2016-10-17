@@ -22,7 +22,7 @@ cooksPlot <- function(obj, ylim=NULL, id=FALSE, print.obs=FALSE, print.plot=TRUE
   cutoff <- 4/(obj$df.residual)
   if(print.plot == TRUE){
   plot(cooks.distance(obj), ylim=ylim, pch=16, main="Cook's Distance", ylab="Cook's Distance")
-  mtext(paste("Cutoff = ", round(cutoff, 6), sep=""), side=3)
+  #mtext(paste("Cutoff = ", round(cutoff, 6), sep=""), side=3)
   abline(h=cutoff, lty=2, col="red")
   }
   if(print.obs & !id){
@@ -39,4 +39,5 @@ cooksPlot <- function(obj, ylim=NULL, id=FALSE, print.obs=FALSE, print.plot=TRUE
     names(rep_df) <- c(n, "Predicted_Y", "Cooks_D")
     return(rep_df)
   }
+  assign("cooksCutOff", cutoff, envir = .GlobalEnv)
 }
