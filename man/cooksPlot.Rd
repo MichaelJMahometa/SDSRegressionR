@@ -2,7 +2,7 @@
 % Please edit documentation in R/cooksPlot.R
 \name{cooksPlot}
 \alias{cooksPlot}
-\title{cooksPlot}
+\title{Create a Cook's Distance Plot}
 \usage{
 cooksPlot(obj, ylim = NULL, id = FALSE, print.obs = FALSE,
   print.plot = TRUE)

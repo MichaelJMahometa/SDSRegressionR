@@ -2,7 +2,7 @@
 % Please edit documentation in R/residFitted.R
 \name{residFitted}
 \alias{residFitted}
-\title{residFitted}
+\title{Create a Residual vs. Fitted Plot}
 \usage{
 residFitted(obj, sigma = FALSE, id = FALSE, print = FALSE, ...)
 }

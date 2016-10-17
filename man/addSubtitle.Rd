@@ -2,7 +2,7 @@
 % Please edit documentation in R/addSubtitle.R
 \name{addSubtitle}
 \alias{addSubtitle}
-\title{addSubtitle}
+\title{Add Subtitle to ggplot Object}
 \usage{
 addSubtitle(title, subtitle)
 }

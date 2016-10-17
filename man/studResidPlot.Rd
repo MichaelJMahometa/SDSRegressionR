@@ -2,7 +2,7 @@
 % Please edit documentation in R/studResidPlot.R
 \name{studResidPlot}
 \alias{studResidPlot}
-\title{studResidPlot}
+\title{Create a Studentized Deleted Residual Plot}
 \usage{
 studResidPlot(obj, id = FALSE, print.obs = FALSE, print.plot = TRUE)
 }

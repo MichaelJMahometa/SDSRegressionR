@@ -2,7 +2,7 @@
 % Please edit documentation in R/leveragePlot.R
 \name{leveragePlot}
 \alias{leveragePlot}
-\title{leveragePlot}
+\title{Create a Leverage (hat values) Plot}
 \usage{
 leveragePlot(obj, ylim = NULL, id = FALSE, print.obs = FALSE,
   print.plot = TRUE)

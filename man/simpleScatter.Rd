@@ -2,7 +2,7 @@
 % Please edit documentation in R/simpleScatter.R
 \name{simpleScatter}
 \alias{simpleScatter}
-\title{Simple Scatter Plots}
+\title{Create a Simple ggplot Scatter Plot}
 \usage{
 simpleScatter(data, x, y, xlab = deparse(substitute(x)),
   ylab = deparse(substitute(y)), title = NULL, subtitle = NULL,
