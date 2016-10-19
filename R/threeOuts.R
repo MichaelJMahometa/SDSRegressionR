@@ -7,7 +7,7 @@
 #'
 #' @seealso
 #' \code{\link{studResidPlot}}
-#' \code{\link{leveragePlot}}
+#' \code{\link{levPlot}}
 #' \code{\link{cooksPlot}}
 #'
 #' @examples
@@ -18,7 +18,7 @@
 #'@export
 threeOuts <- function (obj, print.plot=FALSE){
   s <- studResidPlot(obj, print = TRUE, print.plot = print.plot)
-  l <- leveragePlot(obj, print = TRUE, print.plot = print.plot)
+  l <- levPlot(obj, print = TRUE, print.plot = print.plot)
   c <- cooksPlot(obj, print = TRUE, print.plot = print.plot)
   s$rn <- row.names(s)
   l$rn <- row.names(l)

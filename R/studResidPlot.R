@@ -8,7 +8,7 @@
 #' @param print.plot Logical: Should plot be created?
 #'
 #' @seealso
-#' \code{\link{leveragePlot}}
+#' \code{\link{levPlot}}
 #' \code{\link{cooksPlot}}
 #' \code{\link{threeOuts}}
 #'

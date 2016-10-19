@@ -10,8 +10,6 @@ cooksPlot(obj, ylim = NULL, id = FALSE, print.obs = FALSE,
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
 
-\item{ylim}{Optional ylim for the plot.}
-
 \item{id}{Logical: Should the identy() function be used to describe selected observations? Will automatically invoke print=TRUE for selected observations.}
 
 \item{print.obs}{Logical: Should observations outside the specified sigma level be printed to the console?}

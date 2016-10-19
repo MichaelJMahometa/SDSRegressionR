@@ -2,13 +2,13 @@
 #'
 #' Simple function to produce a plot of the Cook's Distance for each observation after a model run in lm().
 #'
-#' @inheritParams leveragePlot
+#' @inheritParams levPlot
 #' @inheritParams studResidPlot
 #' @param save.cutoff Logical: Should the Cook's Distance cutoff be saved to the Global Environment?
 #'
 #' @seealso
 #' \code{\link{studResidPlot}}
-#' \code{\link{leveragePlot}}
+#' \code{\link{levPlot}}
 #' \code{\link{threeOuts}}
 #'
 #' @examples
