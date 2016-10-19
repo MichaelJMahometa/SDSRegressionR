@@ -1,6 +1,33 @@
-lmDecomp <- function(obj, interest, moderator, mod.type=1, int.levels=NULL, mod.levels=NULL, mod.range=NULL, int.range=NULL, alpha.level=0.05, show.points=FALSE, ros=TRUE){
+#' Decompose lm() Interactions
+#'
+#' This function takes the work of Bauer and Curan (2005) and applies it to a linear model object produced by lm(). Currently, the function handles two types of interactions in the lm() model: (1) Quantitative by Quantitative, which produces the Aiken and West (1991) Pick-a-Point approach simple slopes as well as Johnson-Neyman Regions-of-Significance; and (2) Quantitative by Categorical, which produces the simple slopes for the two levels of the dummy factor level as well as a quasi Region-of-Significance marking values of the Quantitative variable at which the difference of the factor levels change significance.
+#'
+#' All graphs produced are exported to the Global Environment as ggplot object which can be further edited.
+#'
+#' @param obj Model object containing either a Quantitative by Quantitative interaction or a Quantitative by Categorical interaction from lm().
+#' @param interest Variable of interest in the model. Must use quotes.
+#' @param moderator Variable designated as the moderator in the model. Must use quotes.
+#' @param mod.type Defines the TYPE of interaction. Must be an integer of 1 or 2. 1 = Quantitative by Quantitative. 2 = Quantitative by Categorical. Defaults to 1.
+#' @param int.values DEPRECIATED. Set to NULL.
+#' @param mod.values Defines the values of the moderator to be used when calculating simple slopes.
+#' @param int.range Optional. Defines the range of the variable of interest to be graphed.
+#' @param mod.range Optional. Defines the range of the moderator to be graphed.
+#' @param alpha.level Designates the alpha for the Region-of-Significnace. Defaults to 0.5.
+#' @param show.points Logical. Should the original data points be shown on the produced graph? Defaults to FALSE.
+#' @param print.ros Logical. Should the Region-of-Significance graph be created? Defaults to TRUE
+#'
+#' @references
+#' Bauer, D.J. & Curran, P.J., (2005), Probing Interactions in Fixed and Multilevel Regression: Inferential and Graphical Techniques, Multivariate Behavioral Research, 40(3), 373–400.
+#'
+#' @examples
+#' mod <- lm(mpg ~ wt * am, data=mtcars)
+#' summary(mod)
+#' lmDecomp(mod, "wt", "am", mod.type = 2, mod.levels=c(0,1))
+#'
+#' @export
+lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.values=NULL, int.range=NULL, mod.range=NULL, alpha.level=0.05, show.points=FALSE, print.ros=TRUE){
 
-  if(is.logical(show.points) == FALSE | is.logical(ros) == FALSE){
+  if(is.logical(show.points) == FALSE | is.logical(print.ros) == FALSE){
     stop("Logical arguments not supplied. \n Check function details.")
   }
   if(missing(obj) | missing(interest) | missing(moderator)){
@@ -9,10 +36,10 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.levels=NULL, mod.
   if(!mod.type %in% c(1,2)){
     stop("Please select a valid moderator type.")
   }
-  if(mod.type == 1 & is.null(mod.levels)) {
+  if(mod.type == 1 & is.null(mod.values)) {
     stop("Please supply levels of the moderator variable.")
   }
-  if(mod.type == 2 & (is.null(mod.levels) | length(mod.levels) != 2)){
+  if(mod.type == 2 & (is.null(mod.values) | length(mod.values) != 2)){
     stop("Please supply valid levels of the moderator variable.")
   }
   if(!interest %in% attributes(obj$terms)$term.labels){
@@ -65,7 +92,7 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.levels=NULL, mod.
   if(mod.type == 1){ #Continuous Moderator Run
     #Simple Slopes
     #At levels of Z
-    z <- mod.levels
+    z <- mod.values
     interceptz <- (intercept + (betaz*z))
     slopez <- (betax + betaxz*z)
     sez <- sqrt(varb1 + (2*z*covb1b3) + ((z^2)*varb3))
@@ -97,7 +124,7 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.levels=NULL, mod.
       assign("SSlopes", ssout, envir=globalenv())
     }
 
-    if(ros==TRUE){
+    if(print.ros==TRUE){
       #RofS (to graph...)
       #X
       A <- ((tcrit^2) * varb3) - betaxz^2
@@ -163,7 +190,7 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.levels=NULL, mod.
   } else { #Dichotmous Moderator run
     #Simple Slopes
     #At levels of Z
-    z <- mod.levels
+    z <- mod.values
     interceptz <- (intercept + (betaz*z))
     slopez <- (betax + betaxz*z)
     sez <- sqrt(varb1 + (2*z*covb1b3) + ((z^2)*varb3))
@@ -175,7 +202,7 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.levels=NULL, mod.
     #paste("Simple Slopes of", xvar, "at levels of", zvar)
     SSTable <- modtable
 
-    if(ros==TRUE){
+    if(print.ros==TRUE){
       #RofS (dichotomous switch)
       #Z (for dichotomous moderator!!!)
       A <- ((tcrit^2) * varb3) - betaxz^2
@@ -211,8 +238,8 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.levels=NULL, mod.
         geom_abline(aes(intercept=interceptz[2], slope=slopez[2], linetype="b"), show.legend=TRUE) +
         scale_linetype_manual(name="Moderator",
                               values = c("a" = "solid", "b" = "dashed"),
-                              labels=c(paste("Mod.Grp.", mod.levels[1], sep=""),
-                                       paste("Mod.Grp.", mod.levels[2], sep=""))) +
+                              labels=c(paste("Mod.Grp.", mod.values[1], sep=""),
+                                       paste("Mod.Grp.", mod.values[2], sep=""))) +
         geom_vline(xintercept=c(gzlow, gzhig), color="green") +
         annotate("rect", xmin=gzlow, xmax=gzhig, ymin=-Inf, ymax=Inf, alpha=0.2) +
         labs(title="Dichotomous Mediator \n Regions of Significance", x=xvar, y=outcome) +
@@ -223,7 +250,7 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.levels=NULL, mod.
 
       #Show dichotomous graph (with show.points option)
       if(show.points == TRUE){
-        ROSDp <- ROSd + geom_point()
+        ROSdp <- ROSd + geom_point()
         suppressWarnings(print(ROSdp))
         assign("ROS", ROSdp, envir=globalenv())
 
