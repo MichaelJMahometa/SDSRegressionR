@@ -16,7 +16,7 @@
 #' leveragePlot(mod)
 #'
 #' @export
-leveragePlot <- function(obj, ylim=NULL, id=FALSE, print.obs=FALSE, print.plot=TRUE){
+levPlot <- function(obj, ylim=NULL, id=FALSE, print.obs=FALSE, print.plot=TRUE){
   thisdf <- get(paste(eval(obj)$call$data))
   K <- length(coef(obj))
   N <- length(hatvalues(obj))

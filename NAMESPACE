@@ -3,7 +3,7 @@
 export(addSubtitle)
 export(cooksPlot)
 export(histogram)
-export(leveragePlot)
+export(levPlot)
 export(lmBeta)
 export(lmDecomp)
 export(predictValues)
