@@ -6,7 +6,8 @@
 \usage{
 lmDecomp(obj, interest, moderator, mod.type = 1, int.values = NULL,
   mod.values = NULL, int.range = NULL, mod.range = NULL,
-  alpha.level = 0.05, show.points = FALSE, print.ros = TRUE)
+  alpha.level = 0.05, show.points = FALSE, print.sslopes = TRUE,
+  print.ros = TRUE)
 }
 \arguments{
 \item{obj}{Model object containing either a Quantitative by Quantitative interaction or a Quantitative by Categorical interaction from lm().}
@@ -19,9 +20,9 @@ lmDecomp(obj, interest, moderator, mod.type = 1, int.values = NULL,
 
 \item{int.values}{DEPRECIATED. Set to NULL.}
 
-\item{mod.values}{Defines the values of the moderator to be used when calculating simple slopes.}
+\item{mod.values}{Defines the values of the moderator to be used when calculating simple slopes. Only used with mod.type=1. If mod.type=2, mod.values is set to dummy coding (0,1), and comparison will be between indicator level and reference level in the model.}
 
-\item{int.range}{Optional. Defines the range of the variable of interest to be graphed.}
+\item{int.range}{Optional. Defines the range of the variable of interest to be graphed. Only used when mod.type=2.}
 
 \item{mod.range}{Optional. Defines the range of the moderator to be graphed.}
 
@@ -29,7 +30,9 @@ lmDecomp(obj, interest, moderator, mod.type = 1, int.values = NULL,
 
 \item{show.points}{Logical. Should the original data points be shown on the produced graph? Defaults to FALSE.}
 
-\item{print.ros}{Logical. Should the Region-of-Significance graph be created? Defaults to TRUE}
+\item{print.sslopes}{Logical. Should the Simple Slopes graph be created? Defaults to TRUE}
+
+\item{print.ros}{Logical. Should the Region-of-Significance values and graph be created? Defaults to TRUE}
 }
 \description{
 This function takes the work of Bauer and Curan (2005) and applies it to a linear model object produced by lm(). Currently, the function handles two types of interactions in the lm() model: (1) Quantitative by Quantitative, which produces the Aiken and West (1991) Pick-a-Point approach simple slopes as well as Johnson-Neyman Regions-of-Significance; and (2) Quantitative by Categorical, which produces the simple slopes for the two levels of the dummy factor level as well as a quasi Region-of-Significance marking values of the Quantitative variable at which the difference of the factor levels change significance.
@@ -40,7 +43,7 @@ All graphs produced are exported to the Global Environment as ggplot object whic
 \examples{
 mod <- lm(mpg ~ wt * am, data=mtcars)
 summary(mod)
-lmDecomp(mod, "wt", "am", mod.type = 2, mod.levels=c(0,1))
+lmDecomp(mod, "wt", "am", mod.type = 2, mod.values=c(0,1))
 
 }
 \references{

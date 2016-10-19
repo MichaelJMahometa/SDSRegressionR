@@ -22,7 +22,7 @@ threeOuts(mod)
 }
 \seealso{
 \code{\link{studResidPlot}}
-\code{\link{leveragePlot}}
+\code{\link{levPlot}}
 \code{\link{cooksPlot}}
 }
 

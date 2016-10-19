@@ -24,7 +24,7 @@ summary(mod)
 studResidPlot(mod)
 }
 \seealso{
-\code{\link{leveragePlot}}
+\code{\link{levPlot}}
 \code{\link{cooksPlot}}
 \code{\link{threeOuts}}
 }
