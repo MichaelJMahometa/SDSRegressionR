@@ -9,12 +9,13 @@
 #' @param moderator Variable designated as the moderator in the model. Must use quotes.
 #' @param mod.type Defines the TYPE of interaction. Must be an integer of 1 or 2. 1 = Quantitative by Quantitative. 2 = Quantitative by Categorical. Defaults to 1.
 #' @param int.values DEPRECIATED. Set to NULL.
-#' @param mod.values Defines the values of the moderator to be used when calculating simple slopes.
-#' @param int.range Optional. Defines the range of the variable of interest to be graphed.
+#' @param mod.values Defines the values of the moderator to be used when calculating simple slopes. Only used with mod.type=1. If mod.type=2, mod.values is set to dummy coding (0,1), and comparison will be between indicator level and reference level in the model.
+#' @param int.range Optional. Defines the range of the variable of interest to be graphed. Only used when mod.type=2.
 #' @param mod.range Optional. Defines the range of the moderator to be graphed.
 #' @param alpha.level Designates the alpha for the Region-of-Significnace. Defaults to 0.5.
 #' @param show.points Logical. Should the original data points be shown on the produced graph? Defaults to FALSE.
-#' @param print.ros Logical. Should the Region-of-Significance graph be created? Defaults to TRUE
+#' @param print.sslopes Logical. Should the Simple Slopes graph be created? Defaults to TRUE
+#' @param print.ros Logical. Should the Region-of-Significance values and graph be created? Defaults to TRUE
 #'
 #' @references
 #' Bauer, D.J. & Curran, P.J., (2005), Probing Interactions in Fixed and Multilevel Regression: Inferential and Graphical Techniques, Multivariate Behavioral Research, 40(3), 373–400.
@@ -22,10 +23,10 @@
 #' @examples
 #' mod <- lm(mpg ~ wt * am, data=mtcars)
 #' summary(mod)
-#' lmDecomp(mod, "wt", "am", mod.type = 2, mod.levels=c(0,1))
+#' lmDecomp(mod, "wt", "am", mod.type = 2, mod.values=c(0,1))
 #'
 #' @export
-lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.values=NULL, int.range=NULL, mod.range=NULL, alpha.level=0.05, show.points=FALSE, print.ros=TRUE){
+lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.values=NULL, int.range=NULL, mod.range=NULL, alpha.level=0.05, show.points=FALSE, print.sslopes = TRUE, print.ros=TRUE){
 
   if(is.logical(show.points) == FALSE | is.logical(print.ros) == FALSE){
     stop("Logical arguments not supplied. \n Check function details.")
@@ -37,10 +38,10 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
     stop("Please select a valid moderator type.")
   }
   if(mod.type == 1 & is.null(mod.values)) {
-    stop("Please supply levels of the moderator variable.")
+    stop("Please supply values of the moderator variable.")
   }
   if(mod.type == 2 & (is.null(mod.values) | length(mod.values) != 2)){
-    stop("Please supply valid levels of the moderator variable.")
+    stop("Please supply valid values of the moderator variable.")
   }
   if(!interest %in% attributes(obj$terms)$term.labels){
     stop("Variable of interest not in supplied model object.")
@@ -70,23 +71,29 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
   covb2b3 <- vcov(obj)[zvar, xzint]
   degrees <- summary(obj)$df[2]
   tcrit <- qt((1-(alpha.level/2)), degrees)
-  thisdata <- obj$model
+  #thisdata <- obj$model #NOT for factors
+  #thisdata <- as.data.frame.matrix(obj$model)
+  thisda <- data.frame(as.numeric(unlist(data.frame(model.frame(obj)[,1]))),
+                       data.frame(model.matrix(obj)[,-1]))
+  names(thisda) <- c(obj$terms[[2]], names(data.frame(model.matrix(obj))[-1]))
+  thisdata <- as.data.frame.matrix(thisda)
 
   if(xzpval > alpha.level){
     warning("Interaction term not significant. \n Results of decomposition may be noninterpretable.")
   }
 
-  if(length(obj$xlevels) == 0){
-    m <- table(thisdata[,zvar])
-    if(mod.type == 1 & length(m) == 2){
-      stop("Moderator has just two values. Please select the correct mod.type")
-    }
-  }
-  if(length(obj$xlevels != 0)){
-    if(length(obj$xlevels) > 0 & mod.type == 1 & names(obj$xlevels) %in% zvar){
-      stop("Moderator appears to be categorical. Please select the correct mod.type")
-    }
-  }
+  #NEED TO FIX...
+  # if(length(obj$xlevels) == 0){
+  #   m <- table(thisdata[,zvar])
+  #   if(mod.type == 1 & length(m) == 2){
+  #     stop("Moderator variable has just two values. Please select the correct mod.type")
+  #   }
+  # }
+  # if(length(obj$xlevels != 0)){
+  #   if(length(obj$xlevels) > 0 & mod.type == 1 & names(obj$xlevels) %in% zvar){
+  #     stop("Moderator appears to be categorical. Please select the correct mod.type")
+  #   }
+  # }
 
 
   if(mod.type == 1){ #Continuous Moderator Run
@@ -104,6 +111,7 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
     #paste("Simple Slopes of", xvar, "at levels of", zvar)
     SSTable <- modtable
 
+    if(print.sslopes == TRUE){
     #Simple Slopes graph (user supplied mod levels)
     ssdata <- modtable #Grab the simple slopes to use
     ssdata[,1] <- factor(ssdata[,1])
@@ -122,6 +130,7 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
     } else {
       print(ssout)
       assign("SSlopes", ssout, envir=globalenv())
+    }
     }
 
     if(print.ros==TRUE){
