@@ -14,8 +14,8 @@
 #' @param mod.range Optional. Defines the range of the moderator to be graphed.
 #' @param alpha.level Designates the alpha for the Region-of-Significnace. Defaults to 0.5.
 #' @param show.points Logical. Should the original data points be shown on the produced graph? Defaults to FALSE.
-#' @param print.sslopes Logical. Should the Simple Slopes graph be created? Defaults to TRUE
-#' @param print.ros Logical. Should the Region-of-Significance values and graph be created? Defaults to TRUE
+#' @param print.sslopes Logical. Should the Simple Slopes graph be created? Defaults to TRUE.
+#' @param print.ros Logical. Should the Region-of-Significance values and graph be created? Defaults to FALSE.
 #'
 #' @references
 #' Bauer, D.J. & Curran, P.J., (2005), Probing Interactions in Fixed and Multilevel Regression: Inferential and Graphical Techniques, Multivariate Behavioral Research, 40(3), 373–400.
@@ -26,7 +26,7 @@
 #' lmDecomp(mod, "wt", "am", mod.type = 2, mod.values=c(0,1))
 #'
 #' @export
-lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.values=NULL, int.range=NULL, mod.range=NULL, alpha.level=0.05, show.points=FALSE, print.sslopes = TRUE, print.ros=TRUE){
+lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.values=NULL, int.range=NULL, mod.range=NULL, alpha.level=0.05, show.points=FALSE, print.sslopes = TRUE, print.ros=FALSE){
 
   if(is.logical(show.points) == FALSE | is.logical(print.ros) == FALSE){
     stop("Logical arguments not supplied. \n Check function details.")
@@ -129,7 +129,7 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
       geom_blank() +
       geom_abline(data=ssdata, aes(intercept=Intercept, slope=Slope, linetype=ssdata[,1]), show.legend=TRUE) +
       scale_linetype_discrete(name="Moderator \n Levels") +
-      labs(title="Continuous Mediator Graph", x=xvar, y=outcome) +
+      labs(title="Continuous Moderator Graph", x=xvar, y=outcome) +
       theme_bw()
 
     #Show graph (with show.points option)
@@ -225,6 +225,28 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
     names(modtable) <- c(paste(zvar), "Intercept", "Slope", "SE", "t-value", "p-value")
     #paste("Simple Slopes of", xvar, "at levels of", zvar)
     SSTable <- modtable
+
+    if(print.sslopes == TRUE){
+      #Simple Slopes graph (user supplied mod levels)
+      ssdata <- modtable #Grab the simple slopes to use
+      ssdata[,1] <- factor(ssdata[,1])
+      ssout <- ggplot(thisdata, aes(x=thisdata[,xvar], y=thisdata[,outcome])) +
+        geom_blank() +
+        geom_abline(data=ssdata, aes(intercept=Intercept, slope=Slope, linetype=ssdata[,1]), show.legend=TRUE) +
+        scale_linetype_discrete(name="Moderator \n Levels") +
+        labs(title="Dichotomous Moderator Graph", x=xvar, y=outcome) +
+        theme_bw()
+
+      #Show graph (with show.points option)
+      if(show.points == TRUE){
+        ssoutp <- ssout + geom_point()
+        print(ssoutp)
+        assign("SSlopes", ssoutp, envir=globalenv())
+      } else {
+        print(ssout)
+        assign("SSlopes", ssout, envir=globalenv())
+      }
+    }
 
     if(print.ros==TRUE){
       #RofS (dichotomous switch)
