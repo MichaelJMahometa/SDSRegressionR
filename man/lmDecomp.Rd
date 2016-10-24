@@ -20,7 +20,7 @@ lmDecomp(obj, interest, moderator, mod.type = 1, int.values = NULL,
 
 \item{int.values}{DEPRECIATED. Set to NULL.}
 
-\item{mod.values}{Defines the values of the moderator to be used when calculating simple slopes. Only used with mod.type=1. If mod.type=2, mod.values is set to dummy coding (0,1), and comparison will be between indicator level and reference level in the model.}
+\item{mod.values}{Defines the values of the moderator to be used when calculating simple slopes. Only used with mod.type=1. If mod.type=2, mod.values is set to *dummy* coding (0,1), and comparison will be between indicator level and reference level in the model.}
 
 \item{int.range}{Optional. Defines the range of the variable of interest to be graphed. Only used when mod.type=2.}
 
