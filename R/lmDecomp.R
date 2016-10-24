@@ -9,7 +9,7 @@
 #' @param moderator Variable designated as the moderator in the model. Must use quotes.
 #' @param mod.type Defines the TYPE of interaction. Must be an integer of 1 or 2. 1 = Quantitative by Quantitative. 2 = Quantitative by Categorical. Defaults to 1.
 #' @param int.values DEPRECIATED. Set to NULL.
-#' @param mod.values Defines the values of the moderator to be used when calculating simple slopes. Only used with mod.type=1. If mod.type=2, mod.values is set to dummy coding (0,1), and comparison will be between indicator level and reference level in the model.
+#' @param mod.values Defines the values of the moderator to be used when calculating simple slopes. Only used with mod.type=1. If mod.type=2, mod.values is set to *dummy* coding (0,1), and comparison will be between indicator level and reference level in the model.
 #' @param int.range Optional. Defines the range of the variable of interest to be graphed. Only used when mod.type=2.
 #' @param mod.range Optional. Defines the range of the moderator to be graphed.
 #' @param alpha.level Designates the alpha for the Region-of-Significnace. Defaults to 0.5.
@@ -40,15 +40,22 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
   if(mod.type == 1 & is.null(mod.values)) {
     stop("Please supply values of the moderator variable.")
   }
-  if(mod.type == 2 & (is.null(mod.values) | length(mod.values) != 2)){
-    stop("Please supply valid values of the moderator variable.")
-  }
-  if(!interest %in% attributes(obj$terms)$term.labels){
+  # if(mod.type == 2 & (is.null(mod.values) | length(mod.values) != 2)){
+  #   stop("Please supply valid values of the moderator variable.")
+  # }
+  # if(!interest %in% attributes(obj$terms)$term.labels){
+  #   stop("Variable of interest not in supplied model object.")
+  # }
+  # if(!moderator %in% attributes(obj$terms)$term.labels){
+  #   stop("Moderator variable not in supplied model object.")
+  # }
+  if(!interest %in% names(obj$coeff)){
     stop("Variable of interest not in supplied model object.")
   }
-  if(!moderator %in% attributes(obj$terms)$term.labels){
+  if(!moderator %in% names(obj$coeff)){
     stop("Moderator variable not in supplied model object.")
   }
+
   ## Start Function
   outcome <- paste(obj$terms[[2]])
   xvar <- interest
@@ -82,19 +89,22 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
     warning("Interaction term not significant. \n Results of decomposition may be noninterpretable.")
   }
 
-  #NEED TO FIX...
-  # if(length(obj$xlevels) == 0){
-  #   m <- table(thisdata[,zvar])
-  #   if(mod.type == 1 & length(m) == 2){
-  #     stop("Moderator variable has just two values. Please select the correct mod.type")
-  #   }
-  # }
-  # if(length(obj$xlevels != 0)){
+  if(length(unlist(obj$xlevels)) == 0){
+    m <- table(thisdata[,zvar])
+    if(mod.type == 1 & length(m) == 2){
+      stop("Moderator variable has just two values. Please select the correct mod.type")
+    }
+  }
+  # if(length(unlist(obj$xlevels)) != 0){
   #   if(length(obj$xlevels) > 0 & mod.type == 1 & names(obj$xlevels) %in% zvar){
   #     stop("Moderator appears to be categorical. Please select the correct mod.type")
   #   }
   # }
-
+  if(length(unlist(obj$xlevels)) != 0){
+    if(length(obj$xlevels) > 0 & mod.type == 1 & regexpr(names(obj$xlevels), zvar)[1] > 0){
+      stop("Moderator appears to be categorical. Please select the correct mod.type")
+    }
+  }
 
   if(mod.type == 1){ #Continuous Moderator Run
     #Simple Slopes
@@ -171,7 +181,7 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
         geom_vline(xintercept=c(gxlow, gxhig), color="green") +
         geom_hline(yintercept=0, color="black") +
         annotate("rect", xmin=gxlow, xmax=gxhig, ymin=-Inf, ymax=Inf, alpha=0.2) +
-        labs(title="Continuous Mediator \n Regions of Signficance", x=moderator, y=paste("Slope of", xvar)) +
+        labs(title="Continuous Moderator \n Regions of Signficance", x=moderator, y=paste("Slope of", xvar)) +
         theme_bw()
 
       #   #Show graph (with show.points option)
@@ -197,6 +207,11 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
       out
     }
   } else { #Dichotmous Moderator run
+    #Force dummy coding
+    if(mod.type == 2){
+      mod.values <- c(0,1)
+    }
+
     #Simple Slopes
     #At levels of Z
     z <- mod.values
@@ -251,7 +266,7 @@ lmDecomp <- function(obj, interest, moderator, mod.type=1, int.values=NULL, mod.
                                        paste("Mod.Grp.", mod.values[2], sep=""))) +
         geom_vline(xintercept=c(gzlow, gzhig), color="green") +
         annotate("rect", xmin=gzlow, xmax=gzhig, ymin=-Inf, ymax=Inf, alpha=0.2) +
-        labs(title="Dichotomous Mediator \n Regions of Significance", x=xvar, y=outcome) +
+        labs(title="Dichotomous Moderator \n Regions of Significance", x=xvar, y=outcome) +
         theme_bw()
       if(!is.null(int.range)){
         ROSd <- ROSd + xlim(int.range)
