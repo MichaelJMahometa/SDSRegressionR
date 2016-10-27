@@ -10,7 +10,7 @@ Description: Helper functions for the Applied Rgression Analysis course (SDS358)
 URL: http://github.com/MichaelJMahometa/SDSRegressionR
 BugReports: http://github.com/MichaelJMahometa/SDSRegressionR/issues
 License: GPL-2
-LazyData: TRUE
+LazyData: true
 Imports:
     ggplot2,
     grid,
