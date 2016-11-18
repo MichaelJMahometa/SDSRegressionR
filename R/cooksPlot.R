@@ -19,7 +19,8 @@
 #'
 #'@export
 cooksPlot <- function(obj, ylim=NULL, id=FALSE, print.obs=FALSE, print.plot=TRUE, save.cutoff=FALSE){
-  thisdf <- get(paste(eval(obj)$call$data))
+  #thisdf <- get(paste(eval(obj)$call$data))
+  thisdf <- obj$model
   cutoff <- 4/(obj$df.residual)
   if(print.plot == TRUE){
   plot(cooks.distance(obj), ylim=ylim, pch=16, main="Cook's Distance", ylab="Cook's Distance")

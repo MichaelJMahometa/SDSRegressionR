@@ -14,7 +14,8 @@
 #' @export
 #'
 residFitted <- function(obj, sigma=FALSE, id=FALSE, print=FALSE, ...){
-  thisdf <- get(paste(eval(obj)$call$data))
+  #thisdf <- get(paste(eval(obj)$call$data))
+  thisdf <- obj$model
   plot(fitted.values(obj), residuals(obj), pch=16, ylab="Residuals", xlab="Fitted Values", main="Residuals vs. Fitted",...)
   abline(h=0, lty=2, col="green")
   if (!sigma & print){

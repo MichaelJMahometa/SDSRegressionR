@@ -19,7 +19,8 @@
 #'
 #' @export
 standResidPlot <- function(obj, id=FALSE, print.obs=FALSE, print.plot=TRUE){
-  thisdf <- get(paste(eval(obj)$call$data))
+  #thisdf <- get(paste(eval(obj)$call$data))
+  thisdf <- obj$model
   mx <- max(abs(rstandard(obj)))
   if (print.plot == TRUE){
     plot(rstandard(obj), pch=16, ylab="Standardized Residuals", main="Standardized Residuals", ylim=c(min(c(-mx, -2)), max(c(mx, 2)))) #STANDARDIZED.

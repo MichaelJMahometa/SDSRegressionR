@@ -18,7 +18,8 @@
 #' studResidPlot(mod)
 #' @export
 studResidPlot <- function(obj, id=FALSE, print.obs=FALSE, print.plot=TRUE){
-  thisdf <- get(paste(eval(obj)$call$data))
+  #thisdf <- get(paste(eval(obj)$call$data))
+  thisdf <- obj$model
   mx <- max(abs(rstudent(obj)))
   if (print.plot == TRUE){
   plot(rstudent(obj), pch=16, ylab="Studentized Residuals", main="Studentized Deleted Residuals", ylim=c(min(c(-mx, -2)), max(c(mx, 2)))) #studentized.

@@ -17,7 +17,8 @@
 #'
 #' @export
 levPlot <- function(obj, ylim=NULL, id=FALSE, print.obs=FALSE, print.plot=TRUE){
-  thisdf <- get(paste(eval(obj)$call$data))
+  #thisdf <- get(paste(eval(obj)$call$data))
+  thisdf <- obj$model
   K <- length(coef(obj))
   N <- length(hatvalues(obj))
   hat.avg <- K/N
