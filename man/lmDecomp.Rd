@@ -30,9 +30,9 @@ lmDecomp(obj, interest, moderator, mod.type = 1, int.values = NULL,
 
 \item{show.points}{Logical. Should the original data points be shown on the produced graph? Defaults to FALSE.}
 
-\item{print.sslopes}{Logical. Should the Simple Slopes graph be created? Defaults to TRUE}
+\item{print.sslopes}{Logical. Should the Simple Slopes graph be created? Defaults to TRUE.}
 
-\item{print.ros}{Logical. Should the Region-of-Significance values and graph be created? Defaults to TRUE}
+\item{print.ros}{Logical. Should the Region-of-Significance values and graph be created? Defaults to FALSE.}
 }
 \description{
 This function takes the work of Bauer and Curan (2005) and applies it to a linear model object produced by lm(). Currently, the function handles two types of interactions in the lm() model: (1) Quantitative by Quantitative, which produces the Aiken and West (1991) Pick-a-Point approach simple slopes as well as Johnson-Neyman Regions-of-Significance; and (2) Quantitative by Categorical, which produces the simple slopes for the two levels of the dummy factor level as well as a quasi Region-of-Significance marking values of the Quantitative variable at which the difference of the factor levels change significance.
