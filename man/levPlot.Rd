@@ -4,19 +4,21 @@
 \alias{levPlot}
 \title{Create a Leverage (hat values) Plot}
 \usage{
-levPlot(obj, ylim = NULL, id = FALSE, print.obs = FALSE,
-  print.plot = TRUE)
+levPlot(obj, ylim = NULL, key.variable = NULL, print.obs = FALSE,
+  print.plot = TRUE, sort.obs = FALSE)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
 
 \item{ylim}{Optional ylim for the plot.}
 
-\item{id}{Logical: Should the identy() function be used to describe selected observations? Will automatically invoke print=TRUE for selected observations.}
+\item{key.variable}{Used if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, row.names will be used instead.}
 
 \item{print.obs}{Logical: Should observations outside the specified sigma level be printed to the console?}
 
 \item{print.plot}{Logical: Should plot be created?}
+
+\item{sort.obs}{Logical: Should observations (if print.obs=TRUE) be sorted?}
 }
 \description{
 Simple function to produce a plot of the hat values (leverage) after a model run in lm().

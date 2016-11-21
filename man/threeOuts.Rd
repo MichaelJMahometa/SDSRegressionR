@@ -4,10 +4,12 @@
 \alias{threeOuts}
 \title{Combine All Three Common Outlier Types}
 \usage{
-threeOuts(obj, print.plot = FALSE)
+threeOuts(obj, key.variable = NULL, print.plot = FALSE)
 }
 \arguments{
 \item{obj}{Model object from an lm() fiitted equation.}
+
+\item{key.variable}{Used if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, row.names will be used instead.}
 
 \item{print.plots}{Logical: Should plots for all three outlier tests be shown?}
 }

@@ -4,16 +4,19 @@
 \alias{standResidPlot}
 \title{Create a Standardized Residual Plot}
 \usage{
-standResidPlot(obj, id = FALSE, print.obs = FALSE, print.plot = TRUE)
+standResidPlot(obj, key.variable = NULL, print.obs = FALSE,
+  print.plot = TRUE, sort.obs = FALSE)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
 
-\item{id}{Logical: Should the identy() function be used to describe selected observations? Will automatically invoke print=TRUE for selected observations.}
+\item{key.variable}{Used if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, row.names will be used instead.}
 
 \item{print.obs}{Logical: Should observations outside the specified sigma level be printed to the console?}
 
 \item{print.plot}{Logical: Should plot be created?}
+
+\item{sort.obs}{Logical: Should observations (if print.obs=TRUE) be sorted?}
 }
 \description{
 Produce a Standardized Residual plot. NOT recommended. Use Studentized Deleted instead
@@ -23,9 +26,9 @@ mod <- lm(hp ~ disp, data=mtcars)
 summary(mod)
 standResidPlot(mod)
 
+
 }
 \seealso{
 \code{\link{studResidPlot}}
 }
-\keyword{internal}
 
