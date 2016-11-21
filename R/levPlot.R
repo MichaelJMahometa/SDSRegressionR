@@ -16,9 +16,9 @@
 #' leveragePlot(mod)
 #'
 #' @export
-levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.plot=TRUE){
-  #thisdf <- get(paste(eval(obj)$call$data))
-  thisdf <- obj$model
+levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE){
+  thisdf <- get(paste(eval(obj)$call$data))
+  #thisdf <- obj$model
   K <- length(coef(obj))
   N <- length(hatvalues(obj))
   hat.avg <- K/N
@@ -40,7 +40,6 @@ levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.pl
                            obj$fitted.values[names(hatvalues(obj)[i])],
                            hatvalues(obj)[names(fitted.values(obj)[i])])
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Hat_Values")
-      return(rep_df)
     } else {
       #if data.frame (or maybe data.table?)
       i <- names(hatvalues(obj))[hatvalues(obj) > hat.avg * 2]
@@ -50,7 +49,10 @@ levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.pl
                            obj$fitted.values[names(hatvalues(obj)[i])],
                            hatvalues(obj)[names(fitted.values(obj)[i])])
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Hat_Values")
-      return(rep_df)
     }
+    if(sort.obs){
+      rep_df <- rep_df[order(rep_df$Hat_Values), ]
+    }
+    return(rep_df)
   }
 }

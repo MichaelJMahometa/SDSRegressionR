@@ -18,9 +18,9 @@
 #' cooksPlot(mod)
 #'
 #'@export
-cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, save.cutoff=FALSE){
-  #thisdf <- get(paste(eval(obj)$call$data))
-  thisdf <- obj$model
+cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE, save.cutoff=FALSE){
+  thisdf <- get(paste(eval(obj)$call$data))
+  #thisdf <- obj$model
   cutoff <- 4/(obj$df.residual)
   if(print.plot == TRUE){
   plot(cooks.distance(obj), ylim=ylim, pch=16, main="Cook's Distance", ylab="Cook's Distance")
@@ -41,7 +41,6 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
                            obj$fitted.values[names(cooks.distance(obj)[i])],
                            cooks.distance(obj)[names(fitted.values(obj)[i])])
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Cooks_Distance")
-      return(rep_df)
     } else {
       #if data.frame (or maybe data.table?)
       i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
@@ -51,8 +50,11 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
                            obj$fitted.values[names(cooks.distance(obj)[i])],
                            cooks.distance(obj)[names(fitted.values(obj)[i])])
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Cooks_Distance")
-      return(rep_df)
     }
+    if(sort.obs){
+      rep_df <- rep_df[order(rep_df$Cooks_Distance), ]
+    }
+    return(rep_df)
   }
   if(save.cutoff){
   assign("cooksCutOff", cutoff, envir = .GlobalEnv)

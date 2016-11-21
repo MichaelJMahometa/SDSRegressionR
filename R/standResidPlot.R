@@ -3,9 +3,10 @@
 #' Produce a Standardized Residual plot. NOT recommended. Use Studentized Deleted instead
 #'
 #' @param obj Object from an lm() fiitted equation.
-#' @param key.variable Used if data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, row.names will be used instead.
+#' @param key.variable Used if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, row.names will be used instead.
 #' @param print.obs Logical: Should observations outside the specified sigma level be printed to the console?
 #' @param print.plot Logical: Should plot be created?
+#' @param sort.obs Logical: Should observations (if print.obs=TRUE) be sorted?
 #'
 #' @seealso
 #' \code{\link{studResidPlot}}
@@ -15,10 +16,9 @@
 #' summary(mod)
 #' standResidPlot(mod)
 #'
-#' @keywords internal
 #'
 #' @export
-standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot=TRUE){
+standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE){
   thisdf <- get(paste(eval(obj)$call$data)) #get ORIGINAL data (for tibble key.variable)
   #thisdf <- obj$model
   mx <- max(abs(rstandard(obj)))
@@ -41,7 +41,6 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
                            obj$fitted.values[names(rstandard(obj)[i])],
                            rstandard(obj)[names(fitted.values(obj)[i])])
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Standard_Resid")
-      return(rep_df)
     } else {
       #if data.frame (or maybe data.table?)
       i <- names(rstandard(obj))[abs(rstandard(obj)) > 2]
@@ -51,7 +50,10 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
                            obj$fitted.values[names(rstandard(obj)[i])],
                            rstandard(obj)[names(fitted.values(obj)[i])])
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Standard_Resid")
-      return(rep_df)
     }
+    if(sort.obs){
+      rep_df <- rep_df[order(rep_df$Standard_Resid), ]
+    }
+    return(rep_df)
   }
 }
