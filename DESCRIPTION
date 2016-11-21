@@ -1,8 +1,8 @@
 Package: SDSRegressionR
 Type: Package
 Title: Helper functions for Applied Regression Analysis
-Version: 0.7.4
-Date: 2016-04-28
+Version: 0.7.5
+Date: 2016-11-21
 Author: Michael J. Mahometa
 Maintainer: Michael J. Mahometa <michael.mahometa@austin.utexas.edu>
 Description: Helper functions for the Applied Rgression Analysis course (SDS358)
@@ -15,11 +15,13 @@ Imports:
     ggplot2,
     grid,
     stringr,
+    tibble,
     plyr
 Depends:    
     ggplot2,
     grid,
     stringr,
+    tibble,
     plyr
 Suggests:
     rgl
