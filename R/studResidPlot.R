@@ -3,7 +3,7 @@
 #' Produce a studentized deleted residual plot.
 #'
 #' @param obj Object from an lm() fiitted equation.
-#' @param id Logical: Should the identy() function be used to describe selected observations? Will automatically invoke print=TRUE for selected observations.
+#' @param key.variable Used if data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, row.names will be used instead.
 #' @param print.obs Logical: Should observations outside the specified sigma level be printed to the console?
 #' @param print.plot Logical: Should plot be created?
 #'
@@ -17,27 +17,40 @@
 #' summary(mod)
 #' studResidPlot(mod)
 #' @export
-studResidPlot <- function(obj, id=FALSE, print.obs=FALSE, print.plot=TRUE){
-  #thisdf <- get(paste(eval(obj)$call$data))
-  thisdf <- obj$model
+studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TRUE){
+  thisdf <- get(paste(eval(obj)$call$data)) #get ORIGINAL data (for tibble key.variable)
+  #thisdf <- obj$model
   mx <- max(abs(rstudent(obj)))
   if (print.plot == TRUE){
   plot(rstudent(obj), pch=16, ylab="Studentized Residuals", main="Studentized Deleted Residuals", ylim=c(min(c(-mx, -2)), max(c(mx, 2)))) #studentized.
   abline(h=0, lty=2)
   abline(h=c(-2,2), lty=2, col="red")
   }
-  if (print.obs & !id) {
-    i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
-    n <- names(obj$model)
-    rep_df <- data.frame(thisdf[names(rstudent(obj)[i]),n], obj$fitted.values[names(rstudent(obj)[i])], rstudent(obj)[names(fitted.values(obj)[i])])
-    names(rep_df) <- c(n, "Predicted_Y", "Student_Resid")
-    return(rep_df)
-  }
-  else if (id) {
-    i <- identify(rstudent(obj), labels=names(rstudent(obj)))
-    n <- names(obj$model)
-    rep_df <- data.frame(thisdf[names(rstudent(obj)[i]),n], obj$fitted.values[names(rstudent(obj)[i])], rstudent(obj)[names(fitted.values(obj)[i])])
-    names(rep_df) <- c(n, "Predicted_Y", "Student_Resid")
-    return(rep_df)
-  }
+  if (print.obs) {
+    if (any(class(thisdf) == "tbl_df") & is.null(key.variable)){
+      #if tibble & NULL key.variable = NULL
+      stop("Data is of tibble class -- key.variable must be supplied.")
+    } else if (any(class(thisdf) == "tbl_df") & !is.null(key.variable)){
+      #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
+      thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
+      i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
+      n <- names(obj$model)
+      rep_df <- data.frame(thisdf[thisdf$rn %in% i, key.variable], #I think i like this indexing better...
+                           thisdf[thisdf$rn %in% i, n],
+                           obj$fitted.values[names(rstudent(obj)[i])],
+                           rstudent(obj)[names(fitted.values(obj)[i])])
+      names(rep_df) <- c(key.variable, n, "Predicted_Y", "Student_Resid")
+      return(rep_df)
+    } else {
+      #if data.frame (or maybe data.table?)
+      i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
+      n <- names(obj$model)
+      rep_df <- data.frame(i,
+                           thisdf[row.names(thisdf) %in% i, n],
+                           obj$fitted.values[names(rstudent(obj)[i])],
+                           rstandard(obj)[names(fitted.values(obj)[i])])
+      names(rep_df) <- c("row.names", n, "Predicted_Y", "Student_Resid")
+      return(rep_df)
+    }
+    }
 }
