@@ -21,13 +21,13 @@ threeOuts <- function (obj, key.variable=NULL, print.plot=FALSE){
   s <- studResidPlot(obj, print.obs = TRUE, print.plot = print.plot, key.variable=key.variable)
   l <- levPlot(obj, print.obs = TRUE, print.plot = print.plot, key.variable=key.variable)
   c <- cooksPlot(obj, print.obs = TRUE, print.plot = print.plot, key.variable=key.variable)
-  s$rn <- row.names(s)
-  l$rn <- row.names(l)
-  c$rn <- row.names(c)
-  all <- join_all(list(s, l, c), by = "rn", type = "full")
+  if(!is.null(key.variable)){
+    all <- join_all(list(s, l, c), by = key.variable, type = "full")
+  } else {
+    all <- join_all(list(s, l, c), by = "row.names", type = "full")
+  }
   all$inThree[!is.na(all$Student_Resid) & !is.na(all$Hat_Values) & !is.na(all$Cooks_D)] <- 1
   all <- all[order(-all$inThree, -all$Cooks_D), ]
-  rownames(all) <- all$rn
-  all <- subset(all, select = !names(all) %in% "rn")
+  row.names(all) <- NULL
   all
 }
