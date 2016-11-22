@@ -39,7 +39,7 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
       rep_df <- data.frame(thisdf[thisdf$rn %in% i, key.variable], #I think i like this indexing better...
                            thisdf[thisdf$rn %in% i, n],
                            obj$fitted.values[names(rstandard(obj)[i])],
-                           rstandard(obj)[names(fitted.values(obj)[i])])
+                           rstandard(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Standard_Resid")
     } else {
       #if data.frame (or maybe data.table?)
@@ -48,7 +48,7 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
       rep_df <- data.frame(i,
                            thisdf[row.names(thisdf) %in% i, n],
                            obj$fitted.values[names(rstandard(obj)[i])],
-                           rstandard(obj)[names(fitted.values(obj)[i])])
+                           rstandard(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Standard_Resid")
     }
     if(sort.obs){

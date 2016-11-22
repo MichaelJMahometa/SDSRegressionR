@@ -39,7 +39,7 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
       rep_df <- data.frame(thisdf[thisdf$rn %in% i, key.variable], #I think i like this indexing better...
                            thisdf[thisdf$rn %in% i, n],
                            obj$fitted.values[names(cooks.distance(obj)[i])],
-                           cooks.distance(obj)[names(fitted.values(obj)[i])])
+                           cooks.distance(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Cooks_Distance")
     } else {
       #if data.frame (or maybe data.table?)
@@ -48,7 +48,7 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
       rep_df <- data.frame(i,
                            thisdf[row.names(thisdf) %in% i, n],
                            obj$fitted.values[names(cooks.distance(obj)[i])],
-                           cooks.distance(obj)[names(fitted.values(obj)[i])])
+                           cooks.distance(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Cooks_Distance")
     }
     if(sort.obs){

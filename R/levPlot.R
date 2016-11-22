@@ -38,7 +38,7 @@ levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.pl
       rep_df <- data.frame(thisdf[thisdf$rn %in% i, key.variable], #I think i like this indexing better...
                            thisdf[thisdf$rn %in% i, n],
                            obj$fitted.values[names(hatvalues(obj)[i])],
-                           hatvalues(obj)[names(fitted.values(obj)[i])])
+                           hatvalues(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Hat_Values")
     } else {
       #if data.frame (or maybe data.table?)
@@ -47,7 +47,7 @@ levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.pl
       rep_df <- data.frame(i,
                            thisdf[row.names(thisdf) %in% i, n],
                            obj$fitted.values[names(hatvalues(obj)[i])],
-                           hatvalues(obj)[names(fitted.values(obj)[i])])
+                           hatvalues(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Hat_Values")
     }
     if(sort.obs){
