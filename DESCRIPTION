@@ -1,7 +1,7 @@
 Package: SDSRegressionR
 Type: Package
 Title: Helper functions for Applied Regression Analysis
-Version: 0.7.5
+Version: 0.7.6
 Date: 2016-11-21
 Author: Michael J. Mahometa
 Maintainer: Michael J. Mahometa <michael.mahometa@austin.utexas.edu>
@@ -14,15 +14,17 @@ LazyData: true
 Imports:
     ggplot2,
     grid,
+    plyr,
+    readr,
     stringr,
-    tibble,
-    plyr
+    tibble
 Depends:    
     ggplot2,
     grid,
+    plyr,
+    readr,
     stringr,
-    tibble,
-    plyr
+    tibble
 Suggests:
     rgl
 RoxygenNote: 5.0.1
