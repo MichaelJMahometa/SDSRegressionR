@@ -2,6 +2,7 @@
 
 export(addSubtitle)
 export(cooksPlot)
+export(dfBetas)
 export(histogram)
 export(levPlot)
 export(lmBeta)
