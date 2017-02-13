@@ -19,7 +19,7 @@
 #' summary(mod)
 #' dfBetas(mod)
 #'
-#'@export
+#' @export
 dfBetas <- function(obj, key.variable = NULL, sort=FALSE, standardize=TRUE){
   thisdf <- get(paste(eval(obj)$call$data))
   tbetas <- data.frame(dfbetas(obj))

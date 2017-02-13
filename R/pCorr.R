@@ -11,7 +11,7 @@
 #'  summary(mod)
 #'  pCorr(mod)
 #'
-#'  @export
+#' @export
 pCorr <- function(obj){
   thisdf <- data.frame(as.numeric(unlist(data.frame(model.frame(obj)[,1]))),
                        data.frame(model.matrix(obj)[,-1]))
