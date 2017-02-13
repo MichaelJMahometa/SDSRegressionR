@@ -20,6 +20,5 @@ Requires at least \strong{two} independent variables in the lm() object.
  summary(mod)
  pCorr(mod)
 
- @export
 }
 
