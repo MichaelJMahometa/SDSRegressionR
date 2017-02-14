@@ -17,7 +17,7 @@ pCorr <- function(obj){
                        data.frame(model.matrix(obj)[,-1]))
   names(thisdf) <- c(obj$terms[[2]], names(data.frame(model.matrix(obj))[-1]))
   b <- names(data.frame(model.matrix(obj))[-1]) #all betas
-  if(length(b) < 3){
+  if(length(b) < 2){
     stop("pCorr requires two or more independent variables in lm() object.")
   }
   # m <- as.formula(obj$call$formula) #original formula from model
