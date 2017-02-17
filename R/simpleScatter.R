@@ -13,19 +13,20 @@
 #' @param ylim Typical ylim option to limit the graphed regions of the chart.
 #' @param line Logical: add linear fit line to plot?
 #' @param interval Option denoting the type of interval to be plotted around linear prediction line. Option "none" is default. Other options include "confidence" and "prediction". Use of any option other than "none" will automatically change line=TRUE.
+#' @param ptalpha Alpha value (opacity) of the points graphed. Defaults to 0.8.
 #' @param ... Further arguments passed to or from other methods.
 #' @return ggplot object
 #' @examples
 #' m <- mtcars
 #' simpleScatter(m, disp, hp, title="Horsepower from Displacement")
 #' @export
-simpleScatter <- function(data, x, y, xlab=deparse(substitute(x)), ylab=deparse(substitute(y)), title=NULL, subtitle=NULL, xlim=NULL, ylim=NULL, line=FALSE, interval="none", ...){
+simpleScatter <- function(data, x, y, xlab=deparse(substitute(x)), ylab=deparse(substitute(y)), title=NULL, subtitle=NULL, xlim=NULL, ylim=NULL, line=FALSE, interval="none", ptalpha = 0.8, ...){
   #require(ggplot2) #? Do I need this if I require ggplot2 in the package?
   pars <- as.list(match.call()[-1])
   xvar <- as.character(pars$x)
   yvar <- as.character(pars$y)
   g <- ggplot(data, aes_string(x=xvar, y=yvar)) +
-    geom_point(size=4) +
+    geom_point(size=4, alpha=ptalpha, ...) +
     labs(title=title, x=xlab, y=ylab) +
     coord_cartesian(xlim=xlim, ylim=ylim) +
     theme_bw()

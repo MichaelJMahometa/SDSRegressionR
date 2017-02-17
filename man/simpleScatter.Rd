@@ -6,7 +6,8 @@
 \usage{
 simpleScatter(data, x, y, xlab = deparse(substitute(x)),
   ylab = deparse(substitute(y)), title = NULL, subtitle = NULL,
-  xlim = NULL, ylim = NULL, line = FALSE, interval = "none", ...)
+  xlim = NULL, ylim = NULL, line = FALSE, interval = "none",
+  ptalpha = 0.8, ...)
 }
 \arguments{
 \item{data}{frame to be used.}
@@ -30,6 +31,8 @@ simpleScatter(data, x, y, xlab = deparse(substitute(x)),
 \item{line}{Logical: add linear fit line to plot?}
 
 \item{interval}{Option denoting the type of interval to be plotted around linear prediction line. Option "none" is default. Other options include "confidence" and "prediction". Use of any option other than "none" will automatically change line=TRUE.}
+
+\item{ptalpha}{Alpha value (opacity) of the points graphed. Defaults to 0.8.}
 
 \item{...}{Further arguments passed to or from other methods.}
 }
