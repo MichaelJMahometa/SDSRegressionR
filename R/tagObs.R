@@ -9,7 +9,7 @@
 #' mtcars$In_mod1 <- tagObs(obj = mod_1)
 #' @export
 tagObs <- function(obj, tag=1){
-  mark <- rep(tag, nrow(get(paste(simple_model$call$data))))
+  mark <- rep(tag, nrow(get(paste(obj$call$data))))
   mark[attr(obj$model,"na.action")] <- 0
   mark
 }
