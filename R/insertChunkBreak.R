@@ -4,7 +4,6 @@
 #'
 #' @export
 insertChunkBreak <- function() {
-  rstudioapi::insertText("```
-
-                         ```{r}")
+  rstudioapi::insertText("``` \n
+```{r}")
 }
