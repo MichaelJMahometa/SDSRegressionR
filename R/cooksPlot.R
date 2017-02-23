@@ -54,9 +54,9 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
     if(sort.obs){
       rep_df <- rep_df[order(rep_df$Cooks_Distance), ]
     }
+    if(save.cutoff){
+      assign("cooksCutOff", cutoff, envir = .GlobalEnv)
+    }
     return(rep_df)
-  }
-  if(save.cutoff){
-  assign("cooksCutOff", cutoff, envir = .GlobalEnv)
   }
 }
