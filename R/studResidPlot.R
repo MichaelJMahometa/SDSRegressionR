@@ -52,7 +52,7 @@ studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TR
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Student_Resid")
     }
     if(sort.obs){
-      rep_df <- rep_df[order(rep_df$Student_Resid), ]
+      rep_df <- rep_df[order(-rep_df$Student_Resid), ]
     }
     return(rep_df)
   }

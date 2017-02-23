@@ -52,7 +52,7 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Cooks_Distance")
     }
     if(sort.obs){
-      rep_df <- rep_df[order(rep_df$Cooks_Distance), ]
+      rep_df <- rep_df[order(-rep_df$Cooks_Distance), ]
     }
     if(save.cutoff){
       assign("cooksCutOff", cutoff, envir = .GlobalEnv)

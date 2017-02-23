@@ -4,6 +4,7 @@
 #'
 #' @inheritParams studResidPlot
 #' @param ylim Optional ylim for the plot.
+#' @param save.cutoff Logical: Should the average hat value be saved. The standard cut-offs (graphed) at 2 and 3 times this average hat value.
 #'
 #' @seealso
 #' \code{\link{studResidPlot}}
@@ -16,7 +17,7 @@
 #' leveragePlot(mod)
 #'
 #' @export
-levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE){
+levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE, save.cutoff=FALSE){
   thisdf <- get(paste(eval(obj)$call$data))
   #thisdf <- obj$model
   K <- length(coef(obj))
@@ -51,7 +52,10 @@ levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.pl
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Hat_Values")
     }
     if(sort.obs){
-      rep_df <- rep_df[order(rep_df$Hat_Values), ]
+      rep_df <- rep_df[order(-rep_df$Hat_Values), ]
+    }
+    if(save.cutoff){
+      assign("cooksCutOff", cutoff, envir = .GlobalEnv)
     }
     return(rep_df)
   }
