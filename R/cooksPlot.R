@@ -27,6 +27,9 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
   #mtext(paste("Cutoff = ", round(cutoff, 6), sep=""), side=3)
   abline(h=cutoff, lty=2, col="red")
   }
+  if(save.cutoff){
+    assign("cooksCutOff", cutoff, envir = .GlobalEnv)
+  }
   if(print.obs){
     if (any(class(thisdf) == "tbl_df") & is.null(key.variable)){
       #if tibble & NULL key.variable = NULL
@@ -53,9 +56,6 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
     }
     if(sort.obs){
       rep_df <- rep_df[order(-rep_df$Cooks_Distance), ]
-    }
-    if(save.cutoff){
-      assign("cooksCutOff", cutoff, envir = .GlobalEnv)
     }
     return(rep_df)
   }
