@@ -27,6 +27,9 @@ levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.pl
   plot(hatvalues(obj), ylim=ylim, pch=16, main="Leverage", ylab="Leverage (Hat Values)")
   abline(h=c(2,3)*hat.avg, lty=2, col=c("orange", "red"))
   }
+  if(save.cutoff){
+    assign("cooksCutOff", cutoff, envir = .GlobalEnv)
+  }
   if(print.obs) {
     if (any(class(thisdf) == "tbl_df") & is.null(key.variable)){
       #if tibble & NULL key.variable = NULL
@@ -53,9 +56,7 @@ levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.pl
     }
     if(sort.obs){
       rep_df <- rep_df[order(-rep_df$Hat_Values), ]
-    }
-    if(save.cutoff){
-      assign("cooksCutOff", cutoff, envir = .GlobalEnv)
+      row.names(rep_df) <- NULL
     }
     return(rep_df)
   }

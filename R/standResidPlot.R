@@ -53,6 +53,7 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
     }
     if(sort.obs){
       rep_df <- rep_df[order(rep_df$Standard_Resid), ]
+      row.names(rep_df) <- NULL
     }
     return(rep_df)
   }

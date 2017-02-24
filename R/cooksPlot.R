@@ -56,6 +56,7 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
     }
     if(sort.obs){
       rep_df <- rep_df[order(-rep_df$Cooks_Distance), ]
+      row.names(rep_df) <- NULL
     }
     return(rep_df)
   }
