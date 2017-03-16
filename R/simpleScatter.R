@@ -27,7 +27,7 @@ simpleScatter <- function(data, x, y, xlab=deparse(substitute(x)), ylab=deparse(
   yvar <- as.character(pars$y)
   g <- ggplot(data, aes_string(x=xvar, y=yvar)) +
     geom_point(size=4, alpha=ptalpha, ...) +
-    labs(title=title, x=xlab, y=ylab) +
+    labs(title=title, subtitle=subtitle, x=xlab, y=ylab) +
     coord_cartesian(xlim=xlim, ylim=ylim) +
     theme_bw()
   if(line & interval=="none"){
@@ -46,7 +46,7 @@ simpleScatter <- function(data, x, y, xlab=deparse(substitute(x)), ylab=deparse(
     newdf <- merge(data, p, by=0, all=TRUE, sort=FALSE)
     gp <- ggplot(newdf, aes_string(x=xvar, y=yvar)) +
       geom_point(size=4) +
-      labs(title=title, x=xlab, y=ylab) +
+      labs(title=title, subtitle=subtitle, x=xlab, y=ylab) +
       coord_cartesian(xlim=xlim, ylim=ylim) +
       theme_bw() +
       geom_smooth(method="lm", se=FALSE) +
