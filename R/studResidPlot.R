@@ -36,8 +36,8 @@ studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TR
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
       i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
       n <- names(obj$model)
-      rep_df <- data.frame(thisdf[thisdf$rn %in% i, key.variable], #I think i like this indexing better...
-                           thisdf[thisdf$rn %in% i, n],
+      rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
+                           thisdf[which(thisdf$rn %in% i), n],
                            obj$fitted.values[names(rstudent(obj)[i])],
                            rstudent(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Student_Resid")
@@ -46,7 +46,7 @@ studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TR
       i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(i,
-                           thisdf[row.names(thisdf) %in% i, n],
+                           thisdf[which(row.names(thisdf) %in% i), n],
                            obj$fitted.values[names(rstudent(obj)[i])],
                            rstandard(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Student_Resid")
@@ -58,3 +58,5 @@ studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TR
     return(rep_df)
   }
 }
+
+#Using which() for data.frames - one student couldn't get it to work without....

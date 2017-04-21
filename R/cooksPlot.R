@@ -39,8 +39,8 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
       i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
       n <- names(obj$model)
-      rep_df <- data.frame(thisdf[thisdf$rn %in% i, key.variable], #I think i like this indexing better...
-                           thisdf[thisdf$rn %in% i, n],
+      rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
+                           thisdf[which(thisdf$rn %in% i), n],
                            obj$fitted.values[names(cooks.distance(obj)[i])],
                            cooks.distance(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Cooks_Distance")
@@ -49,7 +49,7 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
       i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
       n <- names(obj$model)
       rep_df <- data.frame(i,
-                           thisdf[row.names(thisdf) %in% i, n],
+                           thisdf[which(row.names(thisdf) %in% i), n],
                            obj$fitted.values[names(cooks.distance(obj)[i])],
                            cooks.distance(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Cooks_Distance")

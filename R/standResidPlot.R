@@ -36,8 +36,8 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
       i <- names(rstandard(obj))[abs(rstandard(obj)) > 2]
       n <- names(obj$model)
-      rep_df <- data.frame(thisdf[thisdf$rn %in% i, key.variable], #I think i like this indexing better...
-                           thisdf[thisdf$rn %in% i, n],
+      rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
+                           thisdf[which(thisdf$rn %in% i), n],
                            obj$fitted.values[names(rstandard(obj)[i])],
                            rstandard(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Standard_Resid")
@@ -46,7 +46,7 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
       i <- names(rstandard(obj))[abs(rstandard(obj)) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(i,
-                           thisdf[row.names(thisdf) %in% i, n],
+                           thisdf[which(row.names(thisdf) %in% i), n],
                            obj$fitted.values[names(rstandard(obj)[i])],
                            rstandard(obj)[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Standard_Resid")
