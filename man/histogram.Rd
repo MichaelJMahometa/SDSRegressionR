@@ -38,4 +38,3 @@ histogram(mtcars$hp, breaks=seq(50, 350, by=25))
 histogram(mtcars$hp, breaks=seq(50, 350, by=25), table=TRUE)
 
 }
-

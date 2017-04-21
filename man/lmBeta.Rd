@@ -18,4 +18,3 @@ summary(mod)
 lmBeta(mod)
 
 }
-

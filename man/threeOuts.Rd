@@ -27,4 +27,3 @@ threeOuts(mod)
 \code{\link{levPlot}}
 \code{\link{cooksPlot}}
 }
-

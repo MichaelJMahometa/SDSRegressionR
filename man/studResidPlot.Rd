@@ -31,4 +31,3 @@ studResidPlot(mod)
 \code{\link{cooksPlot}}
 \code{\link{threeOuts}}
 }
-

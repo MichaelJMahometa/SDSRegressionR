@@ -13,4 +13,3 @@ simplePlane(obj)
 Useful in describing a trivariate model. Used only in slides...
 }
 \keyword{internal}
-

@@ -49,4 +49,3 @@ lmDecomp(mod, "wt", "am", mod.type = 2, mod.values=c(0,1))
 \references{
 Bauer, D.J. & Curran, P.J., (2005), Probing Interactions in Fixed and Multilevel Regression: Inferential and Graphical Techniques, Multivariate Behavioral Research, 40(3), 373–400.
 }
-

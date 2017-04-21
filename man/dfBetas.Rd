@@ -31,4 +31,3 @@ dfBetas(mod)
 \code{\link{cooksPlot}}
 \code{\link{threeOuts}}
 }
-

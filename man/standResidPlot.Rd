@@ -31,4 +31,3 @@ standResidPlot(mod)
 \seealso{
 \code{\link{studResidPlot}}
 }
-

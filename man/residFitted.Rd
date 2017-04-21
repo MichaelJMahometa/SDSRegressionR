@@ -25,4 +25,3 @@ mod <- lm(hp ~ disp, data=mtcars)
 summary(mod)
 residFitted(mod, sigma=2, print=TRUE)
 }
-

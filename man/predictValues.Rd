@@ -17,4 +17,3 @@ Basic function to find fitted values for items in an original data frame.
  mtcars$pred <- predictValues(mod)
 
 }
-

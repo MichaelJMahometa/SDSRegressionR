@@ -46,4 +46,3 @@ A minimal function to produce a ggplot object from two continuous varaibles.
 m <- mtcars
 simpleScatter(m, disp, hp, title="Horsepower from Displacement")
 }
-

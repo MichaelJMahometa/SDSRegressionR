@@ -21,4 +21,3 @@ Requires at least \strong{two} independent variables in the lm() object.
  pCorr(mod)
 
 }
-

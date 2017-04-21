@@ -16,4 +16,3 @@ A minimal function to mark observations use in a prior run lm() model.
 mod_1 <- lm(hp ~ disp + wt, data=mtcars)
 mtcars$In_mod1 <- tagObs(obj = mod_1)
 }
-

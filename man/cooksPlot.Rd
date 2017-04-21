@@ -37,4 +37,3 @@ cooksPlot(mod)
 \code{\link{levPlot}}
 \code{\link{threeOuts}}
 }
-

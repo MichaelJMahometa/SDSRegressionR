@@ -23,4 +23,3 @@ s + addSubtitle("Horsepower from Displacement", "From mtcars dataset")
 \seealso{
 \code{\link{simpleScatter}}
 }
-
