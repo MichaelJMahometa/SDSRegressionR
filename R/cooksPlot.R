@@ -34,7 +34,7 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
     if (any(class(thisdf) == "tbl_df") & is.null(key.variable)){
       #if tibble & NULL key.variable = NULL
       stop("Data is of tibble class -- key.variable must be supplied.")
-    } else if (any(class(thisdf) == "tbl_df") & !is.null(key.variable)){
+    } else if (!is.null(key.variable)){
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
       i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]

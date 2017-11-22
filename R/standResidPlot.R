@@ -3,7 +3,7 @@
 #' Produce a Standardized Residual plot. NOT recommended. Use Studentized Deleted instead
 #'
 #' @param obj Object from an lm() fiitted equation.
-#' @param key.variable Used if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, row.names will be used instead.
+#' @param key.variable Required if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, this is optional and row.names will be used instead.
 #' @param print.obs Logical: Should observations outside the specified sigma level be printed to the console?
 #' @param print.plot Logical: Should plot be created?
 #' @param sort.obs Logical: Should observations (if print.obs=TRUE) be sorted?
@@ -31,7 +31,7 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
     if (any(class(thisdf) == "tbl_df") & is.null(key.variable)){
       #if tibble & NULL key.variable = NULL
       stop("Data is of tibble class -- key.variable must be supplied.")
-    } else if (any(class(thisdf) == "tbl_df") & !is.null(key.variable)){
+    } else if (!is.null(key.variable)){
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
       i <- names(rstandard(obj))[abs(rstandard(obj)) > 2]

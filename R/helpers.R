@@ -1,4 +1,7 @@
 ## stripChunk function
+
+in_file <- "/Users/mjmahometa/ mjmahometa/ Work/ Division/ Summer Institute/  2017/ ForClass/ClassSyntax.Rmd"
+chunk_line=FALSE
 stripChunk <- function(in_file, out_file, chunk_line=FALSE){
   require(stringr)
 
@@ -6,7 +9,7 @@ stripChunk <- function(in_file, out_file, chunk_line=FALSE){
   dir <- substr(in_file, 1 ,max(sl))
   keep <- chunk_line
 
-  rmd <- readLines(in_file)
+  rmd <- readLines(in_file, warn=FALSE)
 
   start <- str_match(rmd,"\\```\\{") #stringr
   end <- str_match(rmd,"^```$") #stringr
@@ -23,6 +26,12 @@ stripChunk <- function(in_file, out_file, chunk_line=FALSE){
   writeLines(code, fileConn)
   close(fileConn)
 }
+
+stripChunk("/Users/mjmahometa/ mjmahometa/ Work/ Division/ Summer Institute/  2017/ ForClass/ClassSyntax.Rmd", "ClassSyntax.R")
+
+## From knitr
+library(knitr)
+purl("/Users/mjmahometa/ mjmahometa/ Work/ Division/ Summer Institute/  2017/ ForClass/ClassSyntax_Day4.Rmd", documentation = 0)
 
 #histogram with right=FALSE (COPY to SDSFoundations)
 # histogram <- function(x, breaks=NULL, table=FALSE, right=FALSE, xlab=deparse(substitute(x)), title=NULL,...){
