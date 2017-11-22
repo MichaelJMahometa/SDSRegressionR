@@ -10,7 +10,7 @@ standResidPlot(obj, key.variable = NULL, print.obs = FALSE,
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
 
-\item{key.variable}{Used if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, row.names will be used instead.}
+\item{key.variable}{Required if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, this is optional and row.names will be used instead.}
 
 \item{print.obs}{Logical: Should observations outside the specified sigma level be printed to the console?}
 
