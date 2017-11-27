@@ -4,8 +4,8 @@
 #'
 #' @inheritParams studResidPlot
 #' @param ylim Optional ylim for the plot.
-#' @param save.cutoff Logical: Should the used cutoff of the hat value be saved. The standard cut-offs (graphed) at 2 and 3 times the average hat value ($(k+1) / n$).
-#' @param cut.level Level to be used in *printing* the list of Leverage outliers. Defaults to 3 times the average hat value ($(k+1) / n$).
+#' @param save.cutoff Logical: Should the used cutoff of the hat value be saved. The standard cut-offs (graphed) at 2 and 3 times the average hat value \eqn{((k+1) / n)}.
+#' @param cut.level Level to be used in *printing* the list of Leverage outliers. Defaults to 3 times the average hat value \eqn{((k+1) / n)}.
 #'
 #' @seealso
 #' \code{\link{studResidPlot}}

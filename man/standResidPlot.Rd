@@ -19,7 +19,10 @@ standResidPlot(obj, key.variable = NULL, print.obs = FALSE,
 \item{sort.obs}{Logical: Should observations (if print.obs=TRUE) be sorted?}
 }
 \description{
-Produce a Standardized Residual plot. NOT recommended. Use Studentized Deleted instead
+Produce a Standardized Residual plot. NOT recommended. Use Studentized Deleted Residuals instead.
+}
+\details{
+This functions creates Standardized Residual values for an observation within an lm() model based on the following: \eqn{(e_i / S_e)}
 }
 \examples{
 mod <- lm(hp ~ disp, data=mtcars)

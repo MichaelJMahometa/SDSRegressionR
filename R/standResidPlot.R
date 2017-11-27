@@ -1,6 +1,8 @@
 #' Create a Standardized Residual Plot
 #'
-#' Produce a Standardized Residual plot. NOT recommended. Use Studentized Deleted instead
+#' Produce a Standardized Residual plot. NOT recommended. Use Studentized Deleted Residuals instead.
+#'
+#' This functions creates Standardized Residual values for an observation within an lm() model based on the following: \eqn{(e_i / S_e)}
 #'
 #' @param obj Object from an lm() fiitted equation.
 #' @param key.variable Required if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, this is optional and row.names will be used instead.
@@ -21,9 +23,12 @@
 standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE){
   thisdf <- get(paste(eval(obj)$call$data)) #get ORIGINAL data (for tibble key.variable)
   #thisdf <- obj$model
-  mx <- max(abs(rstandard(obj)))
+  standRes <- resid(obj) / sigma(obj)
+  # mx <- max(abs(rstandard(obj)))
+  mx <- max(abs(standRes))
   if (print.plot == TRUE){
-    plot(rstandard(obj), pch=16, ylab="Standardized Residuals", main="Standardized Residuals", ylim=c(min(c(-mx, -2)), max(c(mx, 2)))) #STANDARDIZED.
+    # plot(rstandard(obj), pch=16, ylab="Standardized Residuals", main="Standardized Residuals", ylim=c(min(c(-mx, -2)), max(c(mx, 2)))) #STANDARDIZED.
+    plot(standRes, pch=16, ylab="Standardized Residuals", main="Standardized Residuals", ylim=c(min(c(-mx, -2)), max(c(mx, 2)))) #STANDARDIZED.
     abline(h=0, lty=2)
     abline(h=c(-2,2), lty=2, col="red")
   }
@@ -34,21 +39,21 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
     } else if (!is.null(key.variable)){
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
-      i <- names(rstandard(obj))[abs(rstandard(obj)) > 2]
+      i <- names(standRes)[abs(standRes) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
                            thisdf[which(thisdf$rn %in% i), n],
-                           obj$fitted.values[names(rstandard(obj)[i])],
-                           rstandard(obj)[names(fitted.values(obj)[i])], row.names = NULL)
+                           obj$fitted.values[names(standRes[i])],
+                           standRes[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Standard_Resid")
     } else {
       #if data.frame (or maybe data.table?)
-      i <- names(rstandard(obj))[abs(rstandard(obj)) > 2]
+      i <- names(standRes)[abs(standRes) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(i,
                            thisdf[which(row.names(thisdf) %in% i), n],
-                           obj$fitted.values[names(rstandard(obj)[i])],
-                           rstandard(obj)[names(fitted.values(obj)[i])], row.names = NULL)
+                           obj$fitted.values[names(standRes[i])],
+                           standRes[names(fitted.values(obj)[i])], row.names = NULL)
       names(rep_df) <- c("row.names", n, "Predicted_Y", "Standard_Resid")
     }
     if(sort.obs){
