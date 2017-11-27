@@ -5,7 +5,8 @@
 \title{Create a Leverage (hat values) Plot}
 \usage{
 levPlot(obj, ylim = NULL, key.variable = NULL, print.obs = FALSE,
-  print.plot = TRUE, sort.obs = FALSE, save.cutoff = FALSE)
+  print.plot = TRUE, sort.obs = FALSE, save.cutoff = FALSE,
+  cut.level = 3)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
@@ -20,7 +21,9 @@ levPlot(obj, ylim = NULL, key.variable = NULL, print.obs = FALSE,
 
 \item{sort.obs}{Logical: Should observations (if print.obs=TRUE) be sorted?}
 
-\item{save.cutoff}{Logical: Should the average hat value be saved. The standard cut-offs (graphed) at 2 and 3 times this average hat value.}
+\item{save.cutoff}{Logical: Should the used cutoff of the hat value be saved. The standard cut-offs (graphed) at 2 and 3 times the average hat value ($(k+1) / n$).}
+
+\item{cut.level}{Level to be used in *printing* the list of Leverage outliers. Defaults to 3 times the average hat value ($(k+1) / n$).}
 }
 \description{
 Simple function to produce a plot of the hat values (leverage) after a model run in lm().
