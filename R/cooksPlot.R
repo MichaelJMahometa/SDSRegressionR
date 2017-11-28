@@ -58,6 +58,9 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
       rep_df <- rep_df[order(-rep_df$Cooks_Distance), ]
       row.names(rep_df) <- NULL
     }
+    df1 <- summary(obj)$df[3]
+    df2 <- summary(obj)$df[2]
+    rep_df$F_per <- pf(rep_df$Cooks_Distance, df1, df2)
     return(rep_df)
   }
 }
