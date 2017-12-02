@@ -3,7 +3,7 @@
 #' Simple function to produce a plots and a final data frame from studentized deleted residuals, hat values (leverage), and Cook's distance, after a model run in lm(). Resulting dataframe will be sorted by the inThree variable (observation is considered an outlier on all three plots) and then the Cooks_D variable.
 #'
 #' @param obj Model object from an lm() fiitted equation.
-#' @param key.variable Used if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, row.names will be used instead.
+#' @param key.variable Required if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, this is optional and row.names will be used instead.
 #' @param print.plots Logical: Should plots for all three outlier tests be shown?
 #'
 #' @seealso
