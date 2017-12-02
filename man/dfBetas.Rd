@@ -4,19 +4,22 @@
 \alias{dfBetas}
 \title{Return DFBetas or DFBeta values}
 \usage{
-dfBetas(obj, key.variable = NULL, sort = FALSE, standardize = TRUE)
+dfBetas(obj, key.variable = NULL, sort.obs = FALSE, standardize = TRUE,
+  truncate = TRUE)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
 
-\item{key.variable}{Used if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, row.names will be used instead.}
+\item{key.variable}{Required if lm() data object is of tibble class. Name of the unique key variable (identifier variable). If data object is of data.frame class, this is optional and row.names will be used instead.}
 
-\item{sort}{Logical: Should the returned dataframe be sorted by the number of tagged coefficients?}
+\item{sort.obs}{Logical: Should the returned dataframe be sorted by the number of tagged coefficients?}
 
 \item{standardize}{Logicial: Should standardized DFBeta values (DFBetas) be returned in the dataframe?}
+
+\item{truncate}{Logical: Should the output be truncated to show ONLY observations that meet the cut-off standardized difference betas of \eqn{2/sqrt(N)} (the default) or ALL observations in the model?}
 }
 \description{
-Simple function to produce a listing of all DFBetas (or DFBeta) values for the coefficients in a lm() object. Observations to investigate (tagged as Investigate) are row sums of absolute coefficients greater than 2 / sqrt(N).
+Simple function to produce a listing of all DFBetas (or DFBeta) values for the coefficients in a lm() object. Observations to investigate (tagged as Investigate) are row sums of absolute coefficients greater than 2 / sqrt(N). Only observations with a Investigte value of 1 or greater are printed by default.
 }
 \examples{
 
