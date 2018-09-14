@@ -1,4 +1,4 @@
-#Original finctions (NOT USED)
+#Original functions (NOT USED)
 #Studentized Deleted Residual Plot
 studResidPlot <- function(model, id=FALSE, print=FALSE){
   thisdf <- get(paste(eval(model)$call$data))
