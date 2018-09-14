@@ -35,10 +35,10 @@ studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TR
     } else if (!is.null(key.variable)){
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
+      i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
       if(all.obs == TRUE){
         i <- names(rstudent(obj))
       }
-      i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
                            thisdf[which(thisdf$rn %in% i), n],
@@ -47,10 +47,10 @@ studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TR
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Student_Resid")
     } else {
       #if data.frame (or maybe data.table?)
+      i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
       if(all.obs == TRUE){
         i <- names(rstudent(obj))
       }
-      i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(i,
                            thisdf[which(row.names(thisdf) %in% i), n],

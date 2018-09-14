@@ -40,10 +40,10 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
     } else if (!is.null(key.variable)){
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
+      i <- names(standRes)[abs(standRes) > 2]
       if(all.obs == TRUE){
         i <- names(standRes)
       }
-      i <- names(standRes)[abs(standRes) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
                            thisdf[which(thisdf$rn %in% i), n],
@@ -52,10 +52,10 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Standard_Resid")
     } else {
       #if data.frame (or maybe data.table?)
+      i <- names(standRes)[abs(standRes) > 2]
       if(all.obs == TRUE){
         i <- names(standRes)
       }
-      i <- names(standRes)[abs(standRes) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(i,
                            thisdf[which(row.names(thisdf) %in% i), n],

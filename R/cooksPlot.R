@@ -37,10 +37,10 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
     } else if (!is.null(key.variable)){
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
+      i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
       if(all.obs == TRUE){
         i <- names(cooks.distance(obj))
       }
-      i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
       n <- names(obj$model)
       rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
                            thisdf[which(thisdf$rn %in% i), n],
@@ -49,10 +49,10 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Cooks_Distance")
     } else {
       #if data.frame (or maybe data.table?)
+      i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
       if(all.obs == TRUE){
         i <- names(cooks.distance(obj))
       }
-      i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
       n <- names(obj$model)
       rep_df <- data.frame(i,
                            thisdf[which(row.names(thisdf) %in% i), n],

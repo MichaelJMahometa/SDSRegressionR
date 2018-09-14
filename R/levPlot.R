@@ -39,10 +39,10 @@ levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.pl
     } else if (!is.null(key.variable)){
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
+      i <- names(hatvalues(obj))[hatvalues(obj) > hat.avg * cut.level]
       if(all.obs == TRUE){
         i <- names(hatvalues(obj))
       }
-      i <- names(hatvalues(obj))[hatvalues(obj) > hat.avg * cut.level]
       n <- names(obj$model)
       rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
                            thisdf[which(thisdf$rn %in% i), n],
@@ -51,10 +51,10 @@ levPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.pl
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Hat_Values")
     } else {
       #if data.frame (or maybe data.table?)
+      i <- names(hatvalues(obj))[hatvalues(obj) > hat.avg * cut.level]
       if(all.obs == TRUE){
         i <- names(hatvalues(obj))
       }
-      i <- names(hatvalues(obj))[hatvalues(obj) > hat.avg * cut.level]
       n <- names(obj$model)
       rep_df <- data.frame(i,
                            thisdf[which(row.names(thisdf) %in% i), n],
