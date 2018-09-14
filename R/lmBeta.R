@@ -1,8 +1,8 @@
 #' Standardized Betas
 #'
-#' Simple function to produce standardized beta estimates after a model run in lm().
+#' Simple function to produce standardized beta estimates after a model run in \code{lm()}.
 #'
-#' @param obj Model object from an lm() fitted equation.
+#' @param obj Model object from an \code{lm()} fitted equation.
 #'
 #' @examples
 #' mod <- lm(hp ~ disp + wt, data=mtcars)

@@ -7,10 +7,10 @@
 lmBeta(obj)
 }
 \arguments{
-\item{obj}{Model object from an lm() fitted equation.}
+\item{obj}{Model object from an \code{lm()} fitted equation.}
 }
 \description{
-Simple function to produce standardized beta estimates after a model run in lm().
+Simple function to produce standardized beta estimates after a model run in \code{lm()}.
 }
 \examples{
 mod <- lm(hp ~ disp + wt, data=mtcars)
