@@ -7,13 +7,13 @@
 pCorr(obj)
 }
 \arguments{
-\item{obj}{Model object from an lm() fitted equation.}
+\item{obj}{Model object from an \code{lm()} fitted equation.}
 }
 \description{
-Simple function to produce partial and part (semipartial) correlation coefficients after a model run in lm(). Also returns the "squares" of each metric.
+Simple function to produce partial and part (semipartial) correlation coefficients after a model run in \code{lm()}. Also returns the "squares" of each metric.
 }
 \note{
-Requires at least \strong{two} independent variables in the lm() object.
+Requires at least \strong{two} independent variables in the \code{lm()} object.
 }
 \examples{
  mod <- lm(hp ~ disp + wt, data=mtcars)

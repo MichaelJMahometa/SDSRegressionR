@@ -1,10 +1,10 @@
 #' Partial and Semipartial (Part) Correlations
 #'
-#' Simple function to produce partial and part (semipartial) correlation coefficients after a model run in lm(). Also returns the "squares" of each metric.
+#' Simple function to produce partial and part (semipartial) correlation coefficients after a model run in \code{lm()}. Also returns the "squares" of each metric.
 #'
-#' @note Requires at least \strong{two} independent variables in the lm() object.
+#' @note Requires at least \strong{two} independent variables in the \code{lm()} object.
 #'
-#' @param obj Model object from an lm() fitted equation.
+#' @param obj Model object from an \code{lm()} fitted equation.
 #'
 #' @examples
 #'  mod <- lm(hp ~ disp + wt, data=mtcars)
