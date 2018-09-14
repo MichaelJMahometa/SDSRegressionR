@@ -18,7 +18,7 @@
 #' cooksPlot(mod)
 #'
 #'@export
-cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE, save.cutoff=FALSE){
+cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE, all.obs=FALSE, save.cutoff=FALSE){
   thisdf <- get(paste(eval(obj)$call$data))
   #thisdf <- obj$model
   cutoff <- 4/(obj$df.residual)
@@ -37,6 +37,9 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
     } else if (!is.null(key.variable)){
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
+      if(all.obs == TRUE){
+        i <- names(cooks.distance(obj))
+      }
       i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
       n <- names(obj$model)
       rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
@@ -46,6 +49,9 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Cooks_Distance")
     } else {
       #if data.frame (or maybe data.table?)
+      if(all.obs == TRUE){
+        i <- names(cooks.distance(obj))
+      }
       i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
       n <- names(obj$model)
       rep_df <- data.frame(i,

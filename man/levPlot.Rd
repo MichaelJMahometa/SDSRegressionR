@@ -5,8 +5,8 @@
 \title{Create a Leverage (hat values) Plot}
 \usage{
 levPlot(obj, ylim = NULL, key.variable = NULL, print.obs = FALSE,
-  print.plot = TRUE, sort.obs = FALSE, save.cutoff = FALSE,
-  cut.level = 3)
+  print.plot = TRUE, sort.obs = FALSE, all.obs = FALSE,
+  save.cutoff = FALSE, cut.level = 3)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
@@ -20,6 +20,8 @@ levPlot(obj, ylim = NULL, key.variable = NULL, print.obs = FALSE,
 \item{print.plot}{Logical: Should plot be created?}
 
 \item{sort.obs}{Logical: Should observations (if print.obs=TRUE) be sorted?}
+
+\item{all.obs}{Logical: Should \strong{all} observations be printed?}
 
 \item{save.cutoff}{Logical: Should the used cutoff of the hat value be saved. The standard cut-offs (graphed) at 2 and 3 times the average hat value \eqn{((k+1) / n)}.}
 

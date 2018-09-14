@@ -7,6 +7,7 @@
 #' @param print.obs Logical: Should observations outside the specified sigma level be printed to the console?
 #' @param print.plot Logical: Should plot be created?
 #' @param sort.obs Logical: Should observations (if print.obs=TRUE) be sorted?
+#' @param all.obs Logical: Should \strong{all} observations be printed?
 #'
 #' @seealso
 #' \code{\link{levPlot}}
@@ -18,7 +19,7 @@
 #' summary(mod)
 #' studResidPlot(mod)
 #' @export
-studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE){
+studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE, all.obs=FALSE){
   thisdf <- get(paste(eval(obj)$call$data)) #get ORIGINAL data (for tibble key.variable)
   #thisdf <- obj$model
   mx <- max(abs(rstudent(obj)))
@@ -34,6 +35,9 @@ studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TR
     } else if (!is.null(key.variable)){
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
+      if(all.obs == TRUE){
+        i <- names(rstudent(obj))
+      }
       i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
@@ -43,6 +47,9 @@ studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TR
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Student_Resid")
     } else {
       #if data.frame (or maybe data.table?)
+      if(all.obs == TRUE){
+        i <- names(rstudent(obj))
+      }
       i <- names(rstudent(obj))[abs(rstudent(obj)) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(i,

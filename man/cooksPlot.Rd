@@ -5,7 +5,8 @@
 \title{Create a Cook's Distance Plot}
 \usage{
 cooksPlot(obj, ylim = NULL, key.variable = NULL, print.obs = FALSE,
-  print.plot = TRUE, sort.obs = FALSE, save.cutoff = FALSE)
+  print.plot = TRUE, sort.obs = FALSE, all.obs = FALSE,
+  save.cutoff = FALSE)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
@@ -19,6 +20,8 @@ cooksPlot(obj, ylim = NULL, key.variable = NULL, print.obs = FALSE,
 \item{print.plot}{Logical: Should plot be created?}
 
 \item{sort.obs}{Logical: Should observations (if print.obs=TRUE) be sorted?}
+
+\item{all.obs}{Logical: Should \strong{all} observations be printed?}
 
 \item{save.cutoff}{Logical: Should the Cook's Distance cutoff be saved to the Global Environment?}
 }

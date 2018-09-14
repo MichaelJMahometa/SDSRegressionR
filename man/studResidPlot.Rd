@@ -5,7 +5,7 @@
 \title{Create a Studentized Deleted Residual Plot}
 \usage{
 studResidPlot(obj, key.variable = NULL, print.obs = FALSE,
-  print.plot = TRUE, sort.obs = FALSE)
+  print.plot = TRUE, sort.obs = FALSE, all.obs = FALSE)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
@@ -17,6 +17,8 @@ studResidPlot(obj, key.variable = NULL, print.obs = FALSE,
 \item{print.plot}{Logical: Should plot be created?}
 
 \item{sort.obs}{Logical: Should observations (if print.obs=TRUE) be sorted?}
+
+\item{all.obs}{Logical: Should \strong{all} observations be printed?}
 }
 \description{
 Produce a studentized deleted residual plot.

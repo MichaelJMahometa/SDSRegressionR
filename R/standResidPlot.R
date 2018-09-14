@@ -9,6 +9,7 @@
 #' @param print.obs Logical: Should observations outside the specified sigma level be printed to the console?
 #' @param print.plot Logical: Should plot be created?
 #' @param sort.obs Logical: Should observations (if print.obs=TRUE) be sorted?
+#' @param all.obs Logical: Should \strong{all} observations be printed?
 #'
 #' @seealso
 #' \code{\link{studResidPlot}}
@@ -20,7 +21,7 @@
 #'
 #'
 #' @export
-standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE){
+standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE, all.obs=FALSE){
   thisdf <- get(paste(eval(obj)$call$data)) #get ORIGINAL data (for tibble key.variable)
   #thisdf <- obj$model
   standRes <- resid(obj) / sigma(obj)
@@ -39,6 +40,9 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
     } else if (!is.null(key.variable)){
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
+      if(all.obs == TRUE){
+        i <- names(standRes)
+      }
       i <- names(standRes)[abs(standRes) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(thisdf[which(thisdf$rn %in% i), key.variable],
@@ -48,6 +52,9 @@ standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot
       names(rep_df) <- c(key.variable, n, "Predicted_Y", "Standard_Resid")
     } else {
       #if data.frame (or maybe data.table?)
+      if(all.obs == TRUE){
+        i <- names(standRes)
+      }
       i <- names(standRes)[abs(standRes) > 2]
       n <- names(obj$model)
       rep_df <- data.frame(i,
