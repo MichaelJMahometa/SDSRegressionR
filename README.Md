@@ -12,7 +12,7 @@ This package is inended to help students in the Applied Regression Analsyis clas
 
 This package is currently only housed on GitHub.
 
-From the console, please run:
+From the console of RStudio or R, please run:
 ```{r}
 install.packages(devtools)
 devtools:install_github(MichaelJMahometa/SDSRegressionR)
