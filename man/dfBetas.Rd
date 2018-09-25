@@ -4,8 +4,8 @@
 \alias{dfBetas}
 \title{Return DFBetas or DFBeta values}
 \usage{
-dfBetas(obj, key.variable = NULL, sort.obs = FALSE, standardize = TRUE,
-  truncate = TRUE)
+dfBetas(obj, key.variable = NULL, sort.obs = FALSE,
+  standardize = TRUE, truncate = TRUE)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}
