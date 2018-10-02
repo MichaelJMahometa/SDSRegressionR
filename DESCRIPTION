@@ -1,8 +1,8 @@
 Package: SDSRegressionR
 Type: Package
 Title: Helper functions for Applied Regression Analysis
-Version: 0.8.2
-Date: 2018-09-25
+Version: 0.8.3
+Date: 2018-10-02
 Author: Michael J. Mahometa
 Maintainer: Michael J. Mahometa <michael.mahometa@austin.utexas.edu>
 Description: Helper functions for the Applied Regression Analysis course (SDS358)
@@ -12,19 +12,9 @@ BugReports: http://github.com/MichaelJMahometa/SDSRegressionR/issues
 License: GPL-2
 LazyData: true
 Imports:
-    ggplot2,
-    grid,
-    plyr,
-    readr,
-    stringr,
-    tibble
+    tidyverse
 Depends: 
-    ggplot2,
-    grid,
-    plyr,
-    readr,
-    stringr,
-    tibble
+    tidyverse
 Suggests:
     rgl
 RoxygenNote: 6.1.0
