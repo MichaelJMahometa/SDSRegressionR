@@ -4,10 +4,14 @@
 \alias{modelData}
 \title{Create a \emph{FULL} dataset based on a model object}
 \usage{
-modelData(obj)
+modelData(obj, all.vars = TRUE, key.variable = NULL)
 }
 \arguments{
 \item{obj}{Model object from an \code{lm()} fitted equation.}
+
+\item{all.vars}{Logical. Should the new dataset contain \strong{all} the variables from the original, or just a the selection used in the model? Defaults to TRUE.}
+
+\item{key.variable}{Name of the unique key variable (identifier variable). Only used if \code{all.vars=FALSE}.}
 }
 \description{
 Simple function to produce a \emph{FULL} dataset (all variables) for the \emph{observations}  from a model run in \code{lm()}. This is useful in running a nested regression.
