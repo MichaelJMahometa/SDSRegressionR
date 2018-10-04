@@ -12,10 +12,10 @@ BugReports: http://github.com/MichaelJMahometa/SDSRegressionR/issues
 License: GPL-2
 LazyData: true
 Imports:
-    plyr;
+    plyr,
     tidyverse
 Depends:
-    plyr;
+    plyr,
     tidyverse
 Suggests:
     rgl
