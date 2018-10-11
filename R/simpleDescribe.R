@@ -3,7 +3,7 @@
 #' Create a table of descriptive statistics for a \emph{single} numerical variable. This function is \code{dplyr} friendly (accepts piping).
 #'
 #' @param df Dataframe of variable location.
-#' @param vars Variable of numerical nature.
+#' @param oneVar Variable of numerical nature.
 #' @param rnd Rounding of output table (data.frame). Defaults to 3.
 #'
 #' @examples
@@ -12,9 +12,9 @@
 #'   simpleDescribe(mpg)
 #'
 #' @export
-simpleDescribe <- function(df, vars, rnd = 3) {
+simpleDescribe <- function(df, oneVar, rnd = 3) {
   #dplyr for the SINGLE quantitative
-  expr <- enquo(vars)
+  expr <- enquo(oneVar)
 
   #summarize
   t <- summarise(df,

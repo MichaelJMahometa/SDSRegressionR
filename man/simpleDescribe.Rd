@@ -4,12 +4,12 @@
 \alias{simpleDescribe}
 \title{Simple Descriptive Statistics for Numerical Data}
 \usage{
-simpleDescribe(df, vari, rnd = 3)
+simpleDescribe(df, vars, rnd = 3)
 }
 \arguments{
 \item{df}{Dataframe of variable location.}
 
-\item{vari}{Variable of numerical nature.}
+\item{vars}{Variable of numerical nature.}
 
 \item{rnd}{Rounding of output table (data.frame). Defaults to 3.}
 }
