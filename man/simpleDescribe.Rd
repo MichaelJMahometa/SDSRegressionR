@@ -4,14 +4,16 @@
 \alias{simpleDescribe}
 \title{Simple Descriptive Statistics for Numerical Data}
 \usage{
-simpleDescribe(df, vars, rnd = 3)
+simpleDescribe(df, oneVar, rnd = 3, range = FALSE)
 }
 \arguments{
 \item{df}{Dataframe of variable location.}
 
-\item{vars}{Variable of numerical nature.}
+\item{oneVar}{Variable of numerical nature.}
 
 \item{rnd}{Rounding of output table (data.frame). Defaults to 3.}
+
+\item{range}{Logical. Should the range of the variable be included along with Min and Max.}
 }
 \description{
 Create a table of descriptive statistics for a \emph{single} numerical variable. This function is \code{dplyr} friendly (accepts piping).
