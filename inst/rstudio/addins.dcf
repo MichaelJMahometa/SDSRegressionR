@@ -2,3 +2,8 @@ Name: Insert Chunk Break (R)
 Description: Inserts an R code chunk break at the cursor position.
 Binding: insertChunkBreak
 Interactive: false
+
+Name: Insert Codefont (R)
+Description: Inserts the ".codefont" css setting (Internal).
+Binding: insertCodefont
+Interactive: false
