@@ -2,4 +2,5 @@
 #'
 #' Use this for the OPPOSITE of \code{\%in\%}.
 #'
-`%not in%` <- function(x, y) !x %in% y
+#' @keywords internal
+'%not in%' <- function(x, y) !x %in% y
