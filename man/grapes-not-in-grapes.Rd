@@ -9,4 +9,3 @@ x \%not in\% y
 \description{
 Use this for the OPPOSITE of \code{\%in\%}.
 }
-\keyword{internal}
