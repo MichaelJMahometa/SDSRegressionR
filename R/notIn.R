@@ -2,4 +2,4 @@
 #'
 #' Use this for the OPPOSITE of \code{\%in\%}.
 #'
-not_in <- function(x, y) !x %in% y
+`%not in%` <- function(x, y) !x %in% y
