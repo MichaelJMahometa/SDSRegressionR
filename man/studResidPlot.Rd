@@ -5,7 +5,7 @@
 \title{Create a Studentized Deleted Residual Plot}
 \usage{
 studResidPlot(obj, key.variable = NULL, print.obs = FALSE,
-  print.plot = TRUE, sort.obs = FALSE, all.obs = FALSE)
+  print.plot = TRUE, sort.obs = TRUE, all.obs = FALSE)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}

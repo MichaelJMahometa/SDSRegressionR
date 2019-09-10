@@ -18,7 +18,7 @@
 #' cooksPlot(mod)
 #'
 #'@export
-cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE, all.obs=FALSE, save.cutoff=FALSE){
+cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=TRUE, all.obs=FALSE, save.cutoff=FALSE){
   thisdf <- get(paste(eval(obj)$call$data))
   #thisdf <- obj$model
   cutoff <- 4/(obj$df.residual)

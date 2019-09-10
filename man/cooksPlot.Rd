@@ -5,7 +5,7 @@
 \title{Create a Cook's Distance Plot}
 \usage{
 cooksPlot(obj, ylim = NULL, key.variable = NULL, print.obs = FALSE,
-  print.plot = TRUE, sort.obs = FALSE, all.obs = FALSE,
+  print.plot = TRUE, sort.obs = TRUE, all.obs = FALSE,
   save.cutoff = FALSE)
 }
 \arguments{

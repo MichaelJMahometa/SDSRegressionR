@@ -21,7 +21,7 @@
 #'
 #'
 #' @export
-standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE, all.obs=FALSE){
+standResidPlot <- function(obj, key.variable = NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=TRUE, all.obs=FALSE){
   thisdf <- get(paste(eval(obj)$call$data)) #get ORIGINAL data (for tibble key.variable)
   #thisdf <- obj$model
   standRes <- resid(obj) / sigma(obj)

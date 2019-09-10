@@ -19,7 +19,7 @@
 #' summary(mod)
 #' studResidPlot(mod)
 #' @export
-studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=FALSE, all.obs=FALSE){
+studResidPlot <- function(obj, key.variable=NULL, print.obs=FALSE, print.plot=TRUE, sort.obs=TRUE, all.obs=FALSE){
   thisdf <- get(paste(eval(obj)$call$data)) #get ORIGINAL data (for tibble key.variable)
   #thisdf <- obj$model
   mx <- max(abs(rstudent(obj)))
