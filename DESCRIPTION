@@ -1,8 +1,8 @@
 Package: SDSRegressionR
 Type: Package
 Title: Helper functions for Applied Regression Analysis
-Version: 0.8.11
-Date: 2019-09-10
+Version: 0.8.12
+Date: 2019-09-13
 Author: Michael J. Mahometa
 Maintainer: Michael J. Mahometa <michael.mahometa@austin.utexas.edu>
 Description: Helper functions for the Applied Regression Analysis course (SDS358)
@@ -21,4 +21,5 @@ Depends:
     mosaic
 Suggests:
     rgl
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
+Encoding: UTF-8
