@@ -38,6 +38,7 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
       #if tibble & NULL key.variable != NULL (key.variable="Subject_ID")
       thisdf <- add_column(thisdf, rn = row.names(thisdf), .before=key.variable)
       i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
+      i <- i[!is.na(i)] #Fix for Nan in above
       if(all.obs == TRUE){
         i <- names(cooks.distance(obj))
       }
@@ -50,6 +51,7 @@ cooksPlot <- function(obj, ylim=NULL, key.variable=NULL, print.obs=FALSE, print.
     } else {
       #if data.frame (or maybe data.table?)
       i <- names(cooks.distance(obj))[cooks.distance(obj) > cutoff]
+      i <- i[!is.na(i)] #Fix for Nan in above
       if(all.obs == TRUE){
         i <- names(cooks.distance(obj))
       }
