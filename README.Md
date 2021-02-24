@@ -15,7 +15,7 @@ This package is currently only housed on GitHub.
 From the console of RStudio or R, please run:
 ```{r}
 install.packages(devtools)
-devtools:install_github(MichaelJMahometa/SDSRegressionR)
+devtools::install_github("MichaelJMahometa/SDSRegressionR"")
 ```
 
 The installation will also install the required dependencies. See the package *DESCRIPTION* for the current list of dependencies.

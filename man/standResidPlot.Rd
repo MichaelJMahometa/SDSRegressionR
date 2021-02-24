@@ -4,8 +4,14 @@
 \alias{standResidPlot}
 \title{Create a Standardized Residual Plot}
 \usage{
-standResidPlot(obj, key.variable = NULL, print.obs = FALSE,
-  print.plot = TRUE, sort.obs = TRUE, all.obs = FALSE)
+standResidPlot(
+  obj,
+  key.variable = NULL,
+  print.obs = FALSE,
+  print.plot = TRUE,
+  sort.obs = TRUE,
+  all.obs = FALSE
+)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}

@@ -4,10 +4,21 @@
 \alias{simpleScatter}
 \title{Create a Simple ggplot Scatter Plot}
 \usage{
-simpleScatter(data, x, y, xlab = deparse(substitute(x)),
-  ylab = deparse(substitute(y)), title = NULL, subtitle = NULL,
-  xlim = NULL, ylim = NULL, line = FALSE, interval = "none",
-  ptalpha = 0.8, ...)
+simpleScatter(
+  data,
+  x,
+  y,
+  xlab = deparse(substitute(x)),
+  ylab = deparse(substitute(y)),
+  title = NULL,
+  subtitle = NULL,
+  xlim = NULL,
+  ylim = NULL,
+  line = FALSE,
+  interval = "none",
+  ptalpha = 0.8,
+  ...
+)
 }
 \arguments{
 \item{data}{frame to be used.}

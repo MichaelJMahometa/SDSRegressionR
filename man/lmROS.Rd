@@ -4,8 +4,15 @@
 \alias{lmROS}
 \title{Calculate Regions of Significance for \code{lm()} Interactions}
 \usage{
-lmROS(obj, interest, moderator, mod.type = 1, int.range = NULL,
-  mod.range = NULL, alpha.level = 0.05)
+lmROS(
+  obj,
+  interest,
+  moderator,
+  mod.type = 1,
+  int.range = NULL,
+  mod.range = NULL,
+  alpha.level = 0.05
+)
 }
 \arguments{
 \item{obj}{Model object containing either a Quantitative by Quantitative interaction or a Quantitative by Categorical interaction from lm().}

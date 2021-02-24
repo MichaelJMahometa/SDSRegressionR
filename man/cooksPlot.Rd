@@ -4,9 +4,16 @@
 \alias{cooksPlot}
 \title{Create a Cook's Distance Plot}
 \usage{
-cooksPlot(obj, ylim = NULL, key.variable = NULL, print.obs = FALSE,
-  print.plot = TRUE, sort.obs = TRUE, all.obs = FALSE,
-  save.cutoff = FALSE)
+cooksPlot(
+  obj,
+  ylim = NULL,
+  key.variable = NULL,
+  print.obs = FALSE,
+  print.plot = TRUE,
+  sort.obs = TRUE,
+  all.obs = FALSE,
+  save.cutoff = FALSE
+)
 }
 \arguments{
 \item{obj}{Object from an lm() fiitted equation.}

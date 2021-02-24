@@ -4,10 +4,20 @@
 \alias{lmDecomp}
 \title{Decompose lm() Interactions}
 \usage{
-lmDecomp(obj, interest, moderator, mod.type = 1, int.values = NULL,
-  mod.values = NULL, int.range = NULL, mod.range = NULL,
-  alpha.level = 0.05, show.points = FALSE, print.sslopes = TRUE,
-  print.ros = FALSE)
+lmDecomp(
+  obj,
+  interest,
+  moderator,
+  mod.type = 1,
+  int.values = NULL,
+  mod.values = NULL,
+  int.range = NULL,
+  mod.range = NULL,
+  alpha.level = 0.05,
+  show.points = FALSE,
+  print.sslopes = TRUE,
+  print.ros = FALSE
+)
 }
 \arguments{
 \item{obj}{Model object containing either a Quantitative by Quantitative interaction or a Quantitative by Categorical interaction from lm().}
